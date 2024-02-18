@@ -1,6 +1,6 @@
 import React from "react";
 
-const register = () => {
+const login = () => {
   return (
     <>
   <div className="w-full bg-slate-500 h-[650px] mt-[50px] flex justify-center items-center">
@@ -21,4 +21,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default login;
