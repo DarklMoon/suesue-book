@@ -16,7 +16,7 @@ const profile = () => {
       <div className="border border-2 border-white flex justify-center grid grid-row-2">
         {/* Profile template */}
         <div className="border border-2 border-pink">
-          <img class="rounded-full w-36 h-36" src="https://i.pinimg.com/564x/90/59/96/90599631f3186f08e73ec8553c00bda2.jpg" alt="Extra large avatar"></img>
+          <img className="rounded-full w-36 h-36" src="https://i.pinimg.com/564x/90/59/96/90599631f3186f08e73ec8553c00bda2.jpg" alt="Extra large avatar"></img>
         </div>
         <div>
           <div className="border border-2 border-pink">
@@ -24,7 +24,7 @@ const profile = () => {
           </div>
           <div className="border border-2 border-pink">
             <h3>Browser Files</h3>
-            <input type="file" class="block w-full text-sm text-slate-500
+            <input type="file" className="block w-full text-sm text-slate-500
               file:mr-4 file:py-2 file:px-4
               file:rounded-full file:border-0
               file:text-sm file:font-semibold
