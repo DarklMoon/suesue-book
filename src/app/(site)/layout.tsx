@@ -17,6 +17,7 @@ export default function MainLayout({
     <div className="flex h-screen overflow-hidden relative">
       <SideNavbar />
       <div className="flex-1 overflow-auto">
+        <TopBar/>
         <main className="grow ">{children}</main>
       </div>
     </div>

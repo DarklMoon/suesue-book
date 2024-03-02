@@ -38,11 +38,11 @@ function SideNavbar() {
       href: "/cart",
       icon: CgProfile,
     },
-    {
-      name: "Favorite",
-      href: "/favorite",
-      icon: MdOutlineSpaceDashboard,
-    },
+    // {
+    //   name: "Favorite",
+    //   href: "/favorite",
+    //   icon: MdOutlineSpaceDashboard,
+    // },
     {
       name: "Account",
       href: "/account",
