@@ -3,20 +3,20 @@ import React from "react";
 const profile = () => {
   return (
     <>
-  <div className="w-full bg-slate-500 h-[650px] mt-[50px] flex">
-    <div className="ml-[50px] border-b-5 border-black">
-      <div className="ml-[50px]">
-        <h1 className="inline-block">Profile</h1>
+  <div className="w-full bg-slate-500 h-[650px] mt-[50px] ml-4">
+    <div className="ml-[50px] border-b-5 border-black flex items-end">
+      <div className="border-2">
+        <h1 className="text-xl">Profile</h1>
       </div>
-      <div className="ml -[100px]">
-        <h3 className="text-[#AAAAAA]">Manage your profile</h3>
+      <div className="border-2 ml-6">
+        <h3 className="text-[#AAAAAA] text-xs">Manage your profile</h3>
       </div>
     </div>
-    <div className="relative grid grid-cols-2 border border-2 border-black mt-[100px]">
+    <div className="relative grid grid-cols-2 gap-4 border border-2 border-black mt-[100px] w-5/6">
       <div className="border border-2 border-white flex justify-center grid grid-row-2">
         {/* Profile template */}
         <div className="border border-2 border-pink">
-          <img class="rounded-full w-36 h-36" src="https://i.pinimg.com/564x/90/59/96/90599631f3186f08e73ec8553c00bda2.jpg" alt="Extra large avatar"></img>
+          <img className="rounded-full w-36 h-36" src="https://i.pinimg.com/564x/90/59/96/90599631f3186f08e73ec8553c00bda2.jpg" alt="Extra large avatar"></img>
         </div>
         <div>
           <div className="border border-2 border-pink">
@@ -24,7 +24,7 @@ const profile = () => {
           </div>
           <div className="border border-2 border-pink">
             <h3>Browser Files</h3>
-            <input type="file" class="block w-full text-sm text-slate-500
+            <input type="file" className="block w-full text-sm text-slate-500
               file:mr-4 file:py-2 file:px-4
               file:rounded-full file:border-0
               file:text-sm file:font-semibold
@@ -63,6 +63,9 @@ const profile = () => {
           <button className="rounded-l bg-[#F9BC60] ml-7 mt-5">Edit Profile</button>
         </div>
       </div>
+    </div>
+    <div className="border border-5 border-rose-500">
+      <h1>test</h1>
     </div>
   </div>
   </>
