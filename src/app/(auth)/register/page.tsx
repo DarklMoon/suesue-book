@@ -63,7 +63,8 @@ const Register = () => {
   return (
     <div className="w-full flex justify-center items-center min-h-screen bg-[#4F6F52]">
       <div style={{ minWidth: "30%" }}>
-        <div className="flex shadow-lg flex-1 flex-col justify-center px-6 pt-[2em] pb-[15em] lg:px-8 bg-white rounded-md overflow-auto"
+        <div
+          className="flex shadow-lg flex-1 flex-col justify-center px-6 pt-[2em] pb-[15em] lg:px-8 bg-white rounded-md overflow-auto"
           style={{ maxHeight: "90vh" }}
         >
           <h1 className="text-[24px] ml-[30px] mt-[15px] font-semibold">
@@ -145,7 +146,7 @@ const Register = () => {
                       <FormItem className="mt-[5px]">
                         <FormLabel>Password</FormLabel>
                         <FormControl>
-                          <Input placeholder="" {...field} />
+                          <Input placeholder="" type="password" {...field} />
                         </FormControl>
                         <FormMessage className="text-[10px]" />
                       </FormItem>
@@ -158,7 +159,7 @@ const Register = () => {
                       <FormItem className="mt-[5px]">
                         <FormLabel>Confirm Password</FormLabel>
                         <FormControl>
-                          <Input placeholder="" {...field} />
+                          <Input placeholder="" type="password" {...field} />
                         </FormControl>
                         <FormMessage className="text-[10px]" />
                       </FormItem>

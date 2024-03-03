@@ -16,9 +16,16 @@ import Link from "next/link";
 // import { UserType } from "@/types";
 import { LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function TopBar() {
   // const UserReducer = useSelector(UserSelector);
+
+const handleLogout = async () => {
+  await Cookies.remove('session');
+  router.push("/login");
+};
+
   const user = localStorage.getItem("user");
 //   if (!user) {
 //     return null;
@@ -40,7 +47,6 @@ export default function TopBar() {
         /> */}
       </div>
       <div className="flex items-center pr-4 md:pr-16">
-        
         <Menu as="div" className="relative inline-block text-left">
           <div>
             <Menu.Button className="inline-flex w-full justify-center items-center">
@@ -70,33 +76,9 @@ export default function TopBar() {
           >
             <Menu.Items className="absolute right-0 w-56 z-50 mt-2 origin-top-right bg-white rounded shadow-sm">
               <div className="p-1">
-                {/* <Menu.Item>
-                  <Link
-                    href="#"
-                    className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
-                  >
-                    <PencilIcon className="h-4 w-4 mr-2" />
-                    Edit
-                  </Link>
-                </Menu.Item>
-                <Menu.Item>
-                  <Link
-                    href="#"
-                    className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
-                  >
-                    <CreditCardIcon className="h-4 w-4 mr-2" />
-                    Billing
-                  </Link>
-                </Menu.Item> */}
                 <Menu.Item>
                   <div
-                    onClick={() => {
-                      localStorage.removeItem("user");
-                      localStorage.removeItem("accessToken");
-                      localStorage.removeItem("refreshToken");
-                      router.push("/login");
-                      // window.location.href = "/login";
-                    }}
+                    onClick={handleLogout}
                     className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
                   >
                     <LogOutIcon className="h-4 w-4 mr-2" />

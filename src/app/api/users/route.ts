@@ -1,21 +1,16 @@
-import { query } from "@/lib/db";
+import { NextResponse } from "next/server";
+import mockUser from "@/lib/mockUser.json";
 
-export async function GET(request) {
-  let users = [
-    {
-      id: 1,
-      name: "Praveen",
-      email: "praveen@trickuweb.com",
-    },
-    {
-      id: 2,
-      name: "Nitin",
-      email: "nitin@trickuweb.com",
-    },
-  ];
+export async function GET() {
+  return NextResponse.json({
+    Test: "HelloWorld",
+    AllUser: mockUser,
+  });
+}
 
-  let data = JSON.stringify(users);
-  return new Response(data, {
-    status: 200,
+export async function POST(request: Request) {
+  const data = await request.json();
+  return NextResponse.json({
+    POST_DATA: data
   });
 }

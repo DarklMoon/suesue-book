@@ -1,97 +1,44 @@
-"use client";
-import Image from "next/image";
+import React, { useEffect } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { getSession, login, logout } from "@/app/api/auth/route";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
+import LoginForm from "@/components/auth/LoginForm";
+type Props = {};
 
-export default function Home() {
-  const router = useRouter();
+const Login = async (props: Props) => {
+  
+  const session = await getSession();
 
   return (
-    <>
-      <div className="flex justify-center items-center min-h-screen bg-[#4F6F52]">
-        <div style={{ minWidth: "30%" }}>
-          <div className="flex min-h-full shadow-lg flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white">
-            <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-              <h2 className="mt-1 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                Login with Password
-              </h2>
-            </div>
-
-            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-              <form className="space-y-6" action="#" method="POST">
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Email address
-                  </label>
-                  <div className="mt-2">
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between">
-                    <label
-                      htmlFor="password"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Password
-                    </label>
-                    <div className="text-sm">
-                      {/* <a
-                        href="#"
-                        className="font-semibold text-gray-500 hover:text-black"
-                      >
-                        Forgot password?
-                      </a> */}
-                    </div>
-                  </div>
-                  <div className="mt-2">
-                    <input
-                      id="password"
-                      name="password"
-                      type="password"
-                      autoComplete="current-password"
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <button
-                    type="submit"
-                    onClick={() => {
-                      router.push("/home");
-                    }}
-                    className="flex w-full justify-center rounded-md bg-[#F9BC60] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#E16162] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-                  >
-                    Sign in
-                  </button>
-                </div>
-              </form>
-
-              <p className="mt-10 text-center text-sm text-gray-500">
-                You still haven't had an Account yet? <br></br>{" "}
-                <span
-                  className="font-semibold leading-6 text-[#4BA8FF] hover:text-indigo-500 cursor-pointer"
-                  onClick={() => {
-                    router.push("/register");
-                  }}
-                >
-                  Create here !
-                </span>
-              </p>
-            </div>
+    <div className="flex justify-center items-center min-h-screen bg-[#4F6F52]">
+      <div style={{ minWidth: "30%" }}>
+        <div className="flex min-h-full shadow-lg flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-white">
+          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+            <h2 className="mt-1 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+              Login with Password
+            </h2>
+          </div>
+          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <LoginForm/>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default Login;
