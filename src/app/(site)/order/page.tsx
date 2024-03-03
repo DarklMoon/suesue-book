@@ -1,11 +1,11 @@
 import React from "react";
 
-const cart = () => {
+const order = () => {
   return (
     <>
     <div className="h-screen mt-5 p-10 mt-3 ml-[70px] mr-[50px] border border-2 grid">
-      <div className="flex mt-[30px] justify-self-center justify-center pb-[10px] inline w-[150px]">
-        <p className="text-2xl font-bold">Your Cart</p>        
+      <div className="flex mt-[30px] justify-self-center justify-center pb-[10px] inline w-[200px]">
+        <p className="text-2xl font-bold">Order History</p>        
       </div>
       <div className="border-t border-black w-[70px] justify-self-center block"></div>
       <div className="border-b-2 border-[#B7B7B7] h-8 block flex flex-row mt-8 justify-between">
@@ -47,12 +47,12 @@ const cart = () => {
         
           <p className="text-base text-right self-end">Subtotal</p>
           <p className="text-2xl font-bold text-right">150.00 ฿</p>
-          <p className="italic col-span-2 text-right my-2">shipping cost calculated at checkout</p>
-          <button className="rounded-md bg-[#F9BC60] text-[#FFFFFF] font-bold px-10 py-2 col-span-2">Check out -&gt;</button>
+          <div className="my-2"></div>
+          <button className="rounded-md bg-[#F9BC60] text-[#FFFFFF] font-bold px-10 py-2 col-span-2">Back To Profile -&gt;</button>
       </div>
     </div>;
     </>
   );
 };
 
-export default cart;
+export default order;

@@ -8,20 +8,21 @@ const shipping = () => {
   return (
     <>
     <div>
-            <form className="table w-full">
-              <label className="inline-block mx-1 my-2">
-                <input type="text" className="peer border border-[#8C8C8C] pl-4 py-1 w-[285px]" placeholder="Name"/>
-                {/* <p className="mt-2 invisible peer-invalid:visible text-pink-600 text-sm">
-                  Please provide a valid email address.x
-                </p> */}
-              </label>
-              <label className="inline-block mx-1 my-2">
-                <input type="tel" className="peer border border-[#8C8C8C] pl-4 py-1 w-[285px]" placeholder="Phone"/>
-              </label>
+            <form className="table w-full border">
+              <div className="inline-block">
+                <label className="inline-block mx-1 my-2">
+                  <input type="text" className="peer border border-[#8C8C8C] pl-4 py-1 w-[276.5px]" placeholder="Name"/>
+                </label>
+              </div>
+              <div className="inline-block">
+                <label className="inline-block mx-1 my-2">
+                  <input type="tel" className="peer border border-[#8C8C8C] pl-4 py-1 w-[276.5px]" placeholder="Phone"/>
+                </label>
+              </div>
               <label className="block mx-1 my-2">
                 <input type="text" className="peer border border-[#8C8C8C] pl-4 py-1 h w-[100%]" placeholder="Address"/>
               </label>
-              <select id="province" className="peer border border-[#8C8C8C] pl-4 py-1 h w-[100%]">
+              <select id="province" className="peer border border-[#8C8C8C] pl-4 py-1 h w-[553px]">
                 <option selected>Select province</option>
                 <option value="กรุงเทพมหานคร">กรุงเทพมหานคร</option>
                 <option value="กระบี่">กระบี่ </option>
@@ -103,20 +104,20 @@ const shipping = () => {
                 <option value="อื่นๆ">อื่นๆ</option>
               </select>
               <label className="inline-block mx-1 my-2">
-                <input type="text" className="peer border border-[#8C8C8C] pl-4 py-1 h" placeholder="District"/>
+                <input type="text" className="peer border border-[#8C8C8C] pl-4 py-1 h w-[50px]" placeholder="District"/>
               </label>
               <label className="inline-block mx-1 my-2">
-                <input type="text" className="peer border border-[#8C8C8C] pl-4 py-1 h" placeholder="Sub district"/>
+                <input type="text" className="peer border border-[#8C8C8C] pl-4 py-1 h w-[50px]" placeholder="Sub district"/>
               </label>
               <label className="inline-block mx-1 my-2">
-                <input type="text" className="peer border border-[#8C8C8C] pl-4 py-1 h" placeholder="Postal code"/>
+                <input type="text" className="peer border border-[#8C8C8C] pl-4 py-1 h w-[50px]" placeholder="Postal code"/>
               </label>
               
             </form>
             <div className="flex justify-end mt-6">
               <button className="rounded-md bg-[#F9BC60] text-[#FFFFFF] px-10 py-2">Add new address +</button>
             </div>
-          </div>;
+          </div>
     </>
   );
 };
