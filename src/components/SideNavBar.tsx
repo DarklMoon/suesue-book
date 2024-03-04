@@ -29,11 +29,6 @@ function SideNavbar() {
       icon: BiHomeAlt,
     },
     {
-      name: "Categories",
-      href: "/categories",
-      icon: CgCalendar,
-    },
-    {
       name: "Cart",
       href: "/cart",
       icon: CgProfile,
@@ -50,7 +45,7 @@ function SideNavbar() {
     },
     {
       name: "Manage",
-      href: "/manage",
+      href: "/managebooks",
       icon: AiOutlineTeam,
     },
   ];
