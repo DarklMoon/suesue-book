@@ -9,7 +9,7 @@ const categories = () => {
           <div className="w-[200px] h-[240px] bg-[red]">
             <div className="w-full h-[180px] bg-emerald-300 flex justify-center">
               <Image
-                src="/profile.png"
+                src="/BookImg-example.png"
                 width={180}
                 height={50}
                 alt="test"
@@ -22,7 +22,7 @@ const categories = () => {
           <div className="w-[200px] h-[240px] bg-[red]">
             <div className="w-full h-[180px] bg-emerald-300 flex justify-center">
               <Image
-                src="/profile.png"
+                src="/BookImg-example.png"
                 width={180}
                 height={50}
                 alt="test"
@@ -35,7 +35,7 @@ const categories = () => {
           <div className="w-[200px] h-[240px] bg-[red]">
             <div className="w-full h-[180px] bg-emerald-300 flex justify-center">
               <Image
-                src="/profile.png"
+                src="/BookImg-example.png"
                 width={180}
                 height={50}
                 alt="test"
@@ -48,7 +48,7 @@ const categories = () => {
           <div className="w-[200px] h-[240px] bg-[red]">
             <div className="w-full h-[180px] bg-emerald-300 flex justify-center">
               <Image
-                src="/profile.png"
+                src="/BookImg-example.png"
                 width={180}
                 height={50}
                 alt="test"
