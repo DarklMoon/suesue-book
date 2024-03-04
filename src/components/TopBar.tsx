@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import {
   Bars3CenterLeftIcon,
   PencilIcon,
@@ -9,17 +9,12 @@ import {
 } from "@heroicons/react/24/solid";
 import { BellIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Menu, Transition, Popover } from "@headlessui/react";
-import Link from "next/link";
 
-// import { useSelector } from "react-redux";
-// import { UserSelector } from "@/redux/slices/UserSlice";
-// import { UserType } from "@/types";
 import { LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
 export default function TopBar() {
-  // const UserReducer = useSelector(UserSelector);
 
 const handleLogout = async () => {
   await Cookies.remove('session');

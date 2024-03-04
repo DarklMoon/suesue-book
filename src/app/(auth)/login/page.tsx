@@ -1,28 +1,9 @@
-import React, { useEffect } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { getSession, login, logout } from "@/app/api/auth/route";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
-import { redirect } from "next/navigation";
+import React from "react";
 import LoginForm from "@/components/auth/LoginForm";
 type Props = {};
 
 const Login = async (props: Props) => {
   
-  const session = await getSession();
-
   return (
     <div className="flex justify-center items-center min-h-screen bg-[#4F6F52]">
       <div style={{ minWidth: "30%" }}>
