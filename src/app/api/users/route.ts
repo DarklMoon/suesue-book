@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import mockUser from "@/lib/mockUser.json";
+import mockUser from "@/lib/mockData.json";
 
 export async function GET() {
   return NextResponse.json({

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
-import mockUser from "@/lib/mockUser.json";
+import mockUser from "@/lib/mockData.json";
 import bcrypt from "bcrypt";
 
 const secretKey = "secret";

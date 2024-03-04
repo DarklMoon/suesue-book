@@ -31,7 +31,7 @@ const Login = (props: Props) => {
       Password: "",
     },
   });
-  const { toast } = useToast();
+  const { toast: showToast } = useToast();
   
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const formData: FormData = new FormData();
@@ -55,6 +55,10 @@ const Login = (props: Props) => {
         const data = await response.json();
         console.log("DATA ->", data);
         router.refresh()
+        showToast({
+          description: "Register success!",
+          variant: "default",
+        });
         router.push("/home");
       }
     } catch (error) {

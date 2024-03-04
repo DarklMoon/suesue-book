@@ -11,6 +11,7 @@ export async function middleware(request: NextRequest) {
     
   }else{
     if (request.nextUrl.pathname !== "/login" && request.nextUrl.pathname !== "/register") {
+      // alert("Please log in before using the website.");
        return NextResponse.redirect(new URL("/login", request.url));
     }
 

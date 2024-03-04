@@ -17,6 +17,7 @@ import Cookies from "js-cookie";
 export default function TopBar() {
 
 const handleLogout = async () => {
+  console.log("LogOut")
   await Cookies.remove('session');
   router.push("/login");
 };
