@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z
   .object({
@@ -53,11 +54,42 @@ const Register = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+const { toast: showToast } = useToast();
+async function onSubmit(values: z.infer<typeof formSchema>) {
+  const formData: FormData = new FormData();
+
+  formData.append("first_name", values.Firstname);
+  formData.append("last_name", values.Lastname);
+  formData.append("email", values.Email);
+  formData.append("username", values.Username);
+  formData.append("phone", values.Phone);
+  formData.append("password", values.Password);
+
+  try {
+    const response = await fetch("api/auth", {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
+    });
+    if (response) {
+      const data = await response.json();
+      console.log("REGISTER_FORM:", data);
+      showToast({
+        description: "Register success!",
+        variant: "default",
+      });
+
+      router.push("/login")
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    console.log("TRANSACTION_ENDING", formData);
   }
+}
+
     const router = useRouter();
 
   return (

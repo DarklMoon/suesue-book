@@ -13,7 +13,8 @@ import {
 import { CgCalendar, CgProfile } from "react-icons/cg";
 import { AiOutlineTeam } from "react-icons/ai";
 import { MdOutlinePayment } from "react-icons/md";
-// import { FaRegComments } from "react-icons/fa";
+import { BsCart } from "react-icons/bs";
+import { FaBookOpen } from "react-icons/fa";
 import { BiMessageSquareDots, BiHomeAlt } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -31,22 +32,17 @@ function SideNavbar() {
     {
       name: "Cart",
       href: "/cart",
-      icon: CgProfile,
+      icon: BsCart,
     },
-    // {
-    //   name: "Favorite",
-    //   href: "/favorite",
-    //   icon: MdOutlineSpaceDashboard,
-    // },
     {
       name: "Account",
       href: "/account",
-      icon: MdOutlinePayment,
+      icon: CgProfile,
     },
     {
       name: "Manage",
       href: "/managebooks",
-      icon: AiOutlineTeam,
+      icon: FaBookOpen,
     },
   ];
   return (
