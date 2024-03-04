@@ -15,16 +15,16 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-screen mt-5 p-10 justify-center mt-3 ml-[70px] mr-[50px] border border-2">
+    <div className="h-screen mt-5 p-10 justify-center mt-3 ml-[70px] mr-[50px]">
       <div className="border-b-2 mb-4 w-6/12 pl-2 ml-[-10px]">
         <p className="text-2xl font-bold inline-block">Shipping address</p>
         <p className="text-sm text-[#AAAAAA] inline-block ml-3">Select your address</p>
       </div>
-      <div className="flex grid grid-cols-11 grid-row-4 border-2 gap-2">
+      <div className="flex grid grid-cols-11 grid-row-4 gap-2">
         <div className="row-span-1 border-2 border-black col-span-6 flex items-center justify-center">
           <AddressManagement/>
         </div>
-        <div className="row-span-4 col-span-5 border-2 border-lime-400">
+        <div className="row-span-4 col-span-5 border-l-2 border-[#000000]">
           <Subtotal/>
         </div>
         <div className="row-span-3 col-span-6">

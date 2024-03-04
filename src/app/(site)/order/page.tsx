@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link"
 
 const order = () => {
   return (
@@ -48,7 +49,9 @@ const order = () => {
           <p className="text-base text-right self-end">Subtotal</p>
           <p className="text-2xl font-bold text-right">150.00 ฿</p>
           <div className="my-2"></div>
-          <button className="rounded-md bg-[#F9BC60] text-[#FFFFFF] font-bold px-10 py-2 col-span-2">Back To Profile -&gt;</button>
+          <Link href="/profile">
+            <button className="rounded-md bg-[#F9BC60] text-[#FFFFFF] font-bold px-10 py-2 col-span-2">Back To Profile -&gt;</button>
+          </Link>
       </div>
     </div>;
     </>

@@ -9,9 +9,9 @@ const shipping = () => {
     <>
     <div className="grid grid-rows-2">
       <div className="border rounded-lg inline-block flex flex-row items-start">
-        <input id="address1" className="peer/draft" type="radio" name="status" value="address1"/>
-        <label for="address1" class="peer-checked/draft:text-sky-500">
-          <p className="font-bold">You don't have any address now.</p>
+        <input id="address1" className="peer/address1"  type="radio" name="status" value="address1"/>
+        <label for="address1" class="peer-checked/address1:border-[#FFA826] peer-checked/address1:bg-[#FFF1DC]&border-2&text-black">
+          <p className="font-bold">Rertnarith thertsati</p>
           <p>สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง ซอย ฉลองกรุง 1<br/>
           แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพมหานคร 10520 <br/>
           0891231234
@@ -21,7 +21,7 @@ const shipping = () => {
       <div>
         <input id="address2" className="peer/draft" type="radio" name="status" value="address2"/>
         <label for="address2" class="peer-checked/draft:text-sky-500">
-          <p className="font-bold">You don't have any address now.</p>
+          <p className="font-bold">Rertnarith thertsati</p>
           <p>สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง ซอย ฉลองกรุง 1<br/>
           แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพมหานคร 10520 <br/>
           0891231234
