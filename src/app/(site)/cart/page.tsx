@@ -50,7 +50,7 @@ const cart = () => {
           <p className="italic col-span-2 text-right my-2">shipping cost calculated at checkout</p>
           <button className="rounded-md bg-[#F9BC60] text-[#FFFFFF] font-bold px-10 py-2 col-span-2">Check out -&gt;</button>
       </div>
-    </div>;
+    </div>
     </>
   );
 };
