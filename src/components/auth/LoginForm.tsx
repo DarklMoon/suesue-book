@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { redirect } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 type Props = {};
 const formSchema = z.object({
@@ -30,7 +31,8 @@ const Login = (props: Props) => {
       Password: "",
     },
   });
-
+  const { toast: showToast } = useToast();
+  
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const formData: FormData = new FormData();
 
@@ -52,6 +54,11 @@ const Login = (props: Props) => {
       if (response) {
         const data = await response.json();
         console.log("DATA ->", data);
+        router.refresh()
+        showToast({
+          description: "Register success!",
+          variant: "default",
+        });
         router.push("/home");
       }
     } catch (error) {

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
-import mockUser from "@/lib/mockUser.json";
+import mockUser from "@/lib/mockData.json";
 import bcrypt from "bcrypt";
 
 const secretKey = "secret";
@@ -22,29 +22,50 @@ export async function decrypt(input: string): Promise<any> {
   return payload;
 }
 
-export async function POST(request: Request) {
-  const data = await request.json();
+export async function POST(request: NextRequest): Promise<any> {
+  const data = request.formData();
+  const first_name = (await data).get("first_name");
+  const last_name = (await data).get("last_name");
+  const email = (await data).get("email");
+  const username = (await data).get("username");
+  const phone = (await data).get("phone");
+  let password = (await data).get("password");
   try {
-    if (process.env.BCRYPT_SALT !== undefined) {
-      data.Password = bcrypt.hashSync(
-        data.Password,
-        parseInt(process.env.BCRYPT_SALT)
-      );
-    }
+    if (password) {
+      if (process.env.BCRYPT_SALT !== undefined) {
+        password = bcrypt.hashSync(
+          password.toString(),
+          parseInt(process.env.BCRYPT_SALT)
+        );
+      }
+      let userData = {
+        user_id: "1",
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        username: username,
+        password: password,
+        phone: phone,
+        role: "normal",
+      };
+      console.log("userData:", userData);
       return NextResponse.json({
-        Data: data,
+        userData: userData,
       });
-
+    }
   } catch (error) {
-      console.log(error)
-      throw error;
+    console.log(error);
+    throw error;
   }
 }
 
-export async function login(userData: { email: string; username?: string }) {
+
+export async function login(userData: { 
+  email: string; username?: string, user_id?: string, first_name?: string, last_name?: string, 
+  phone?: string, role?: string}) {
   // Verify credentials && get the user
 
-  const user = { email: userData.email, name: userData.username };
+  const user = { email: userData.email, name: userData.username, user_id: userData.user_id, first_name: userData.first_name, last_name: userData.last_name, phone: userData.phone, role: userData.role};
 
   // Create the session
   const expires = new Date(Date.now() + 1800 * 1000);
@@ -69,22 +90,22 @@ export async function getSession() {
   return await decrypt(session);
 }
 
-// export async function updateSession(request: NextRequest) {
-//   const session = request.cookies.get("session")?.value;
-//   if (!session) return;
+export async function updateSession(request: NextRequest) {
+  const session = request.cookies.get("session")?.value;
+  if (!session) return;
 
-//   // Refresh the session so it doesn't expire
-//   const parsed = await decrypt(session);
-//   parsed.expires = new Date(Date.now() + 10 * 1000);
-//   const res = NextResponse.next();
-//   res.cookies.set({
-//     name: "session",
-//     value: await encrypt(parsed),
-//     httpOnly: true,
-//     expires: parsed.expires,
-//   });
-//   return res;
-// }
+  // Refresh the session so it doesn't expire
+  const parsed = await decrypt(session);
+  parsed.expires = new Date(Date.now() + 10 * 1000);
+  const res = NextResponse.next();
+  res.cookies.set({
+    name: "session",
+    value: await encrypt(parsed),
+    httpOnly: true,
+    expires: parsed.expires,
+  });
+  return res;
+}
 
 
 
@@ -105,8 +126,13 @@ export async function PUT(request: NextRequest): Promise<any> {
         if (match) {
           console.log(filteredUsers);
           const { session, expires } = await login({
+            user_id: filteredUsers[0].user_id,
             email: filteredUsers[0].email,
             username: filteredUsers[0].username,
+            first_name: filteredUsers[0].first_name,
+            last_name: filteredUsers[0].last_name,
+            phone: filteredUsers[0].phone,
+            role: filteredUsers[0].role,
           });
 
           // console.log("Session&Expires: ", session, expires)
