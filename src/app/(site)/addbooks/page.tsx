@@ -30,8 +30,8 @@ import {
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+   picture: z.string().min(0, {
+    message: "pls select a picture",
   }),
   author: z.string().min(2, {
     message: "Username must be at least 2 characters.",
@@ -45,7 +45,7 @@ const AddBooks = (props: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      picture: "",
       author: "",
     },
   });
@@ -79,7 +79,7 @@ const AddBooks = (props: Props) => {
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
                 control={form.control}
-                name="username"
+                name="picture"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Picture</FormLabel>
@@ -107,7 +107,7 @@ const AddBooks = (props: Props) => {
 
               <FormField
                 control={form.control}
-                name="username"
+                name="author"
                 render={({ field }) => (
                   <FormItem className="mt-[10px]">
                     <FormLabel>Author</FormLabel>
@@ -121,7 +121,7 @@ const AddBooks = (props: Props) => {
 
               <FormField
                 control={form.control}
-                name="username"
+                name="author"
                 render={({ field }) => (
                   <FormItem className="mt-[10px]">
                     <FormLabel>Description</FormLabel>
@@ -138,7 +138,7 @@ const AddBooks = (props: Props) => {
 
               <FormField
                 control={form.control}
-                name="username"
+                name="author"
                 render={({ field }) => (
                   <FormItem className="mt-[10px]">
                     <FormLabel>Categories</FormLabel>
@@ -164,7 +164,7 @@ const AddBooks = (props: Props) => {
 
               <FormField
                 control={form.control}
-                name="username"
+                name="author"
                 render={({ field }) => (
                   <FormItem className="mt-[10px]">
                     <FormLabel>Price {"(฿)"}</FormLabel>
