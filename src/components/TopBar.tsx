@@ -14,19 +14,21 @@ import { LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
-export default function TopBar() {
+type Props = {};
 
-const handleLogout = async () => {
-  console.log("LogOut")
-  await Cookies.remove('session');
-  router.push("/login");
-};
+export default function TopBar(props: Props) {
+  console.log("PROPS_USER:", props)
+  const handleLogout = async () => {
+    console.log("LogOut");
+    await Cookies.remove("session");
+    router.push("/login");
+  };
 
   const user = localStorage.getItem("user");
-//   if (!user) {
-//     return null;
-//   }
-//   const user1 = JSON.parse(user);
+  //   if (!user) {
+  //     return null;
+  //   }
+  //   const user1 = JSON.parse(user);
   let user1 = null;
   const router = useRouter();
   // useEffect(() => {
