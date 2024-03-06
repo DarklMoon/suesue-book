@@ -7,7 +7,8 @@
     "username": "user_00",
     "password": "password_00",
     "phone": "0123456789",
-    "role": "admin"
+    "role": "admin",
+    "user_img": "https://media.discordapp.net/attachments/1179248317172039810/1214844459435696198/user-icon.png?ex=65fa9711&is=65e82211&hm=91682ed27d8fb64b4a3766e229d32c39b25e1a5ef28f4f8cccc98c281c6d6163&=&format=webp&quality=lossless&width=1876&height=1138"
   },
   {
     "user_id": "1",
@@ -17,7 +18,8 @@
     "username": "user_01",
     "password": "$2b$09$f5cfiLNhHtRSJ11UvClLauf5ZpzMpv9pw3Pa0MFJoIKDIInxv4MQu",
     "phone": "0223456789",
-    "role": "customer"
+    "role": "customer",
+    "user_img": "https://media.discordapp.net/attachments/1179248317172039810/1214844459435696198/user-icon.png?ex=65fa9711&is=65e82211&hm=91682ed27d8fb64b4a3766e229d32c39b25e1a5ef28f4f8cccc98c281c6d6163&=&format=webp&quality=lossless&width=1876&height=1138"
   },
   {
     "user_id": "2",
@@ -27,6 +29,7 @@
     "username": "user_02",
     "password": "password_02",
     "phone": "0323456789",
-    "role": "customer"
+    "role": "customer",
+    "user_img": "https://media.discordapp.net/attachments/1179248317172039810/1214844459435696198/user-icon.png?ex=65fa9711&is=65e82211&hm=91682ed27d8fb64b4a3766e229d32c39b25e1a5ef28f4f8cccc98c281c6d6163&=&format=webp&quality=lossless&width=1876&height=1138"
   }
 ]

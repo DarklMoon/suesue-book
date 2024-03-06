@@ -1,4 +1,4 @@
-import { getSession } from "@/app/api/auth/route";
+import { getSession } from "@/app/api/auth/func/getEnrolls";
 import React from "react";
 
 const account = async () => {
