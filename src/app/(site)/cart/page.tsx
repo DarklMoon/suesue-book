@@ -1,6 +1,8 @@
 import React from "react";
 
-const cart = () => {
+type Props = {};
+
+const cart = (props: Props) => {
   return (
     <>
     <div className="h-screen mt-5 p-10 mt-3 ml-[70px] mr-[50px] border border-2 grid">
