@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import mockUser from "@/lib/mockData.json";
 import bcrypt from "bcrypt";
 import { login } from "./func/getEnrolls";
+import { fetchProducts } from "@/lib/data";
 
 
 export async function POST(request: NextRequest): Promise<any> {
@@ -45,9 +46,15 @@ export async function PUT(request: NextRequest): Promise<any> {
   const data = request.formData();
   const email = (await data).get("email")
   const password = (await data).get("password")
+
+  const data_mydb = await fetchProducts();
+  
   console.log("Email:", email);
   console.log("Password:", password);
+  console.log("GET_DB_USER:", data_mydb);
+
   try {
+
     const filteredUsers = mockUser.filter(
       (user: { email: string }) => user.email === email
     );
