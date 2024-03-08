@@ -45,7 +45,7 @@ export async function POST(request: any) {
         const fileName = await uploadFileToS3(buffer, file.name);
         console.log("FilenameS3:", fileName)
 
-        return NextResponse.json({ success: true, fileName});
+        return NextResponse.json({ success: true, filename: fileName});
     } catch (error) {
         return NextResponse.json({ error });
     }

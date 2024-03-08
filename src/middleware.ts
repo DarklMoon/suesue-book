@@ -31,5 +31,6 @@ export const config = {
     "/updatebooks",
     "/addbook",
     "/account",
+    "/profile"
   ],
 };

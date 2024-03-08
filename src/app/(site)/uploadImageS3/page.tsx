@@ -19,7 +19,7 @@ const UploadImageS3 = () => {
 
     try {
       console.log("File-Front:", file)
-      const response = await fetch("/api/testS3", {
+      const response = await fetch("/api/uploadImgS3", {
         method: "POST",
         body: formData,
       });

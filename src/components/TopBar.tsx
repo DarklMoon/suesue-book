@@ -18,6 +18,7 @@ type User = {
   last_name?: string;
   phone?: string;
   role?: string;
+  user_image?: string;
   // Add other user properties as needed
 };
 

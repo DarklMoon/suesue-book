@@ -36,7 +36,7 @@ function SideNavbar() {
     },
     {
       name: "Account",
-      href: "/account",
+      href: "/profile",
       icon: CgProfile,
     },
     {
