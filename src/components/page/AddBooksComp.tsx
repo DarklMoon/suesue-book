@@ -36,6 +36,15 @@ const formSchema = z.object({
   author: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
+  description: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+  categories: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
+  price: z.string().min(2, {
+    message: "Username must be at least 2 characters.",
+  }),
 });
 
 type Props = {};
@@ -47,6 +56,10 @@ const AddBooks = (props: Props) => {
     defaultValues: {
       picture: "",
       author: "",
+      description :"",
+      categories:"",
+      price:"",
+
     },
   });
 
@@ -84,7 +97,7 @@ const AddBooks = (props: Props) => {
                   <FormItem>
                     <FormLabel>Picture</FormLabel>
                     <FormControl>
-                      <Input id="picture" type="file" />
+                      <Input id="picture" type="file" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -98,26 +111,13 @@ const AddBooks = (props: Props) => {
                   <FormItem className="mt-[10px]">
                     <FormLabel>Author</FormLabel>
                     <FormControl>
-                      <Input placeholder="shadcn" {...field} />
+                      <Input {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="author"
-                render={({ field }) => (
-                  <FormItem className="mt-[10px]">
-                    <FormLabel>Author</FormLabel>
-                    <FormControl>
-                      <Input placeholder="shadcn" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
 
               <FormField
                 control={form.control}
