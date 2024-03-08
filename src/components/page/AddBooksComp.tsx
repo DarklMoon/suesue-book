@@ -28,23 +28,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
-   picture: z.string().min(0, {
+  picture: z.string().min(0, {
     message: "pls select a picture",
   }),
   author: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+    message: "Author must be at least 2 characters.",
   }),
-  description: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+  description: z.string(),
+  categories: z.string().min(0, {
+    message: "Category is required",
   }),
-  categories: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  price: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
+  price: z.string().min(2,{message:"price must be required"})
 });
 
 type Props = {};
@@ -56,19 +53,43 @@ const AddBooks = (props: Props) => {
     defaultValues: {
       picture: "",
       author: "",
-      description :"",
-      categories:"",
-      price:"",
-
+      description: "",
+      categories: "",
+      price: "",
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
+    const formData: FormData = new FormData();
+    formData.append("picture", values.picture);
+    formData.append("author", values.author);
+    formData.append("description", values.description);
+    formData.append("categories", values.categories);
+    formData.append("price", values.price.toString());
+
+    try {
+      const response = await fetch("api/books", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      if (response) {
+        const data = await response.json();
+        router.push("/managebooks")
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      console.log("TRANSACTION_ENDING", formData);
+    }
   }
+
+  const router = useRouter();
 
   return (
     <>
@@ -118,10 +139,9 @@ const AddBooks = (props: Props) => {
                 )}
               />
 
-
               <FormField
                 control={form.control}
-                name="author"
+                name="description"
                 render={({ field }) => (
                   <FormItem className="mt-[10px]">
                     <FormLabel>Description</FormLabel>
@@ -138,17 +158,17 @@ const AddBooks = (props: Props) => {
 
               <FormField
                 control={form.control}
-                name="author"
+                name="categories"
                 render={({ field }) => (
                   <FormItem className="mt-[10px]">
                     <FormLabel>Categories</FormLabel>
                     <FormControl>
-                      <Select {...field}>
+                      <Select>
                         <SelectTrigger className="w-[180px]">
                           <SelectValue placeholder="Select" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectGroup>
+                          <SelectGroup {...field}>
                             <SelectItem value="manga">Manga</SelectItem>
                             <SelectItem value="novel">Novel</SelectItem>
                             <SelectItem value="how-to">How-To</SelectItem>
@@ -164,7 +184,7 @@ const AddBooks = (props: Props) => {
 
               <FormField
                 control={form.control}
-                name="author"
+                name="price"
                 render={({ field }) => (
                   <FormItem className="mt-[10px]">
                     <FormLabel>Price {"(฿)"}</FormLabel>
