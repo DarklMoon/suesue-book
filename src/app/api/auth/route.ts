@@ -81,12 +81,9 @@ export async function PUT(request: NextRequest): Promise<any> {
             role: data_mydb[0].role,
             user_img: data_mydb[0].user_img,
           });
-
-          // console.log("Session&Expires: ", session, expires)
     
           return NextResponse.json({
-            DATA_LOGIN: filteredUsers,
-            Session: session
+            message: "Login Success"
           });
       }
 

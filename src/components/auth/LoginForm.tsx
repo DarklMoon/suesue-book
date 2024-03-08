@@ -53,10 +53,11 @@ const Login = (props: Props) => {
       });
       if (response) {
         const data = await response.json();
+        
         console.log("DATA ->", data);
         router.refresh()
         showToast({
-          description: "Login success!",
+          description: data.message+" !",
           variant: "default",
         });
         router.push("/home");
