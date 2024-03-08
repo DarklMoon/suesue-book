@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import mockUser from "@/lib/mockData.json";
 import bcrypt from "bcrypt";
 import { login, logout } from "./func/getEnrolls";
-import { fetchProducts } from "@/lib/data";
+import { fetchUser, createUser } from "@/lib/data";
 
 
 export async function POST(request: NextRequest): Promise<any> {
@@ -22,18 +22,19 @@ export async function POST(request: NextRequest): Promise<any> {
         );
       }
       let userData = {
-        user_id: "1",
         first_name: first_name,
         last_name: last_name,
         email: email,
         username: username,
         password: password,
         phone: phone,
-        role: "normal",
+        role: "customer",
       };
-      console.log("userData:", userData);
+
+      const result = createUser(userData);
+      
       return NextResponse.json({
-        userData: userData,
+        userData: result,
       });
     }
   } catch (error) {
@@ -44,10 +45,16 @@ export async function POST(request: NextRequest): Promise<any> {
 
 export async function PUT(request: NextRequest): Promise<any> {
   const data = request.formData();
-  const email = (await data).get("email")
-  const password = (await data).get("password")
+  const emailEntry = (await data).get("email");
+  const password = (await data).get("password");
 
-  const data_mydb = await fetchProducts();
+  if (!emailEntry) {
+    // Handle the case where email is not provided
+    throw new Error("Email is required");
+  }
+
+  const email = emailEntry.toString();
+  const data_mydb = await fetchUser({ email });
 
   console.log("Email:", email);
   console.log("Password:", password);
@@ -59,19 +66,20 @@ export async function PUT(request: NextRequest): Promise<any> {
       (user: { email: string }) => user.email === email
     );
 
-    if (filteredUsers.length > 0) {
+    if (data_mydb.length > 0) {
       if(password){
-        const match = await bcrypt.compare(password.toString(), filteredUsers[0].password);
+        const match = await bcrypt.compare(password.toString(), data_mydb[0].password);
         if (match) {
-          console.log(filteredUsers);
+          console.log(data_mydb);
           const { session, expires } = await login({
-            user_id: filteredUsers[0].user_id,
-            email: filteredUsers[0].email,
-            username: filteredUsers[0].username,
-            first_name: filteredUsers[0].first_name,
-            last_name: filteredUsers[0].last_name,
-            phone: filteredUsers[0].phone,
-            role: filteredUsers[0].role,
+            user_id: data_mydb[0].user_id.toString(),
+            email: data_mydb[0].email,
+            username: data_mydb[0].username,
+            first_name: data_mydb[0].first_name,
+            last_name: data_mydb[0].last_name,
+            phone: data_mydb[0].phone,
+            role: data_mydb[0].role,
+            user_img: data_mydb[0].user_img,
           });
 
           // console.log("Session&Expires: ", session, expires)

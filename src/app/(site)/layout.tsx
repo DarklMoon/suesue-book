@@ -1,5 +1,5 @@
 import SideNavbar from "@/components/SideNavBar";
-import TopBar from "@/components/client/TopBar";
+import TopBar from "@/components/TopBar";
 import type { Metadata } from "next";
 import { getSession } from "@/app/api/auth/func/getEnrolls";
 

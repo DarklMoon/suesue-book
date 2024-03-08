@@ -64,7 +64,7 @@ const Login = (props: Props) => {
     } catch (error) {
       console.log(error);
     } finally {
-      console.log("TRANSACTION_ENDING", formData);
+      console.log("TRANSACTION_ENDING");
     }
   }
 
@@ -112,7 +112,7 @@ const Login = (props: Props) => {
           </div>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            You still haven't had an Account yet? <br></br>{" "}
+            You still haven&apos;t had an Account yet? <br></br>{" "}
             <span
               className="font-semibold leading-6 text-[#4BA8FF] hover:text-indigo-500 cursor-pointer"
               onClick={() => {

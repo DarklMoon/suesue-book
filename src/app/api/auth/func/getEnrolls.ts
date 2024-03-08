@@ -28,6 +28,7 @@ export async function login(userData: {
   last_name?: string;
   phone?: string;
   role?: string;
+  user_img?: string;
 }) {
   // Verify credentials && get the user
 
@@ -39,6 +40,7 @@ export async function login(userData: {
     last_name: userData.last_name,
     phone: userData.phone,
     role: userData.role,
+    user_img: userData.user_img
   };
 
   // Create the session
