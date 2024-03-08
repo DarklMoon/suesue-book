@@ -1,7 +1,9 @@
+"use client"
 import { Button } from "@/components/ui/button";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Label } from "@/components/ui/label";
+import Modal from "@/components/page/ModalComp";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Dialog,
@@ -15,6 +17,7 @@ import {
 type Props = {};
 
 const CreditPay = (props: Props) => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <>
       <div className="w-full h-[70px] mt-[80px] ml-[40px]">
@@ -57,6 +60,8 @@ const CreditPay = (props: Props) => {
                 <label htmlFor="item1" className="peer-checked/item1:border-[#FFA826] peer-checked/item1:bg-[#FFF1DC]&border-2&text-black">
                   <p>Credit Name</p>
                   <p>Expire Nov 2026</p>
+                  <button className="border-2" onClick={() => setShowModal(true)}>Modal</button>
+                  <Modal isVisible={showModal} onClose={() => setShowModal(false)}/>
                 </label>
               </div>
               <div className="">

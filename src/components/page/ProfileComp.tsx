@@ -25,12 +25,12 @@ const Profile = (props: Props) => {
             <img className="rounded-full w-36 h-36" src="https://i.pinimg.com/564x/90/59/96/90599631f3186f08e73ec8553c00bda2.jpg" alt="Extra large avatar"></img>
           </div>
           <div className="inline-block">
-            <div className="border border-2 border-pink inline-block">
+            <div className="border-2 border-[#AFAFAF] bg-white px-3 py-[5px] text-[#B7B7B7] rounded-sm inline-block">
               <h3>Choose file to upload</h3>
             </div>
             <div className="inline-block">
               <label className="cursor-pointer">
-                <span>Browser Files</span>
+                <span className="border-2 border-[#AFAFAF] bg-[#D9D9D9] px-3 py-2 text-white rounded-sm">Browser Files</span>
                 <input type="file" className="hidden"/>
               </label>
             </div>
