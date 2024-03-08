@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { fetchBooks } from "@/lib/data";
+import { getSession } from "@/app/api/auth/func/getEnrolls";
 
 
 export async function POST(request: NextRequest): Promise<any> {
@@ -9,6 +9,7 @@ export async function POST(request: NextRequest): Promise<any> {
     const author = (await data).get("author");
     const description = (await data).get("description");
     const price = (await data).get("price");
+    const category = (await data).get("category");
     try {
       if (picture) {
         console.log("aa")
@@ -27,7 +28,6 @@ export async function PUT(request: NextRequest): Promise<any> {
   const email = (await data).get("email")
   const password = (await data).get("password")
 
-  const data_mydb = await fetchBooks();
 
   // try {
 
@@ -80,10 +80,8 @@ export async function PUT(request: NextRequest): Promise<any> {
 
 export async function GET(request: NextRequest): Promise<any> {
   try {
-    const data_mydb = await fetchBooks()
     console.log("GET_METHOD")
     return NextResponse.json({
-      return : data_mydb
     });
 
   } catch (error) {
