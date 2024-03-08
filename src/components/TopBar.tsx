@@ -1,16 +1,11 @@
 "use client";
 import { Fragment } from "react";
 import {
-  Bars3CenterLeftIcon,
-  PencilIcon,
   ChevronDownIcon,
-  CreditCardIcon,
-  Cog8ToothIcon,
 } from "@heroicons/react/24/solid";
-import { BellIcon, CheckIcon } from "@heroicons/react/24/outline";
-import { Menu, Transition, Popover } from "@headlessui/react";
-
-import { Link, LogOutIcon } from "lucide-react";
+import { Menu, Transition } from "@headlessui/react";
+import { BsCart } from "react-icons/bs";
+import { LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -66,10 +61,6 @@ export default function TopBar({ user }: TopBarProps) {
       className={`fixed top-0 right-0 w-full  py-5 flex justify-between items-center transition-all  `}
     >
       <div className="pl-4 md:pl-16">
-        {/* <Bars3CenterLeftIcon
-          className="h-8 w-8 text-gray-700 cursor-pointer"
-          onClick={() => console.log("clicked")}
-        /> */}
       </div>
       <div className="flex items-center pr-4 md:pr-16">
         <Menu as="div" className="relative inline-block text-left">
@@ -101,15 +92,15 @@ export default function TopBar({ user }: TopBarProps) {
           >
             <Menu.Items className="absolute right-0 w-56 z-50 mt-2 origin-top-right bg-white rounded shadow-sm">
               <div className="p-1">
-                {/* <Menu.Item>
-                  <Link
-                    href=""
+                <Menu.Item>
+                  <div
+                    onClick={()=>{router.push("/cart")}}
                     className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
                   >
-                    <CreditCardIcon className="h-4 w-4 mr-2" />
-                    Billing
-                  </Link>
-                </Menu.Item> */}
+                    <BsCart className="h-4 w-4 mr-2" />
+                    Cart
+                  </div>
+                </Menu.Item>
                 <Menu.Item>
                   <div
                     onClick={handleLogout}

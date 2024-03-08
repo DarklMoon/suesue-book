@@ -49,7 +49,6 @@ export async function PUT(request: NextRequest): Promise<any> {
   const password = (await data).get("password");
 
   if (!emailEntry) {
-    // Handle the case where email is not provided
     throw new Error("Email is required");
   }
 
@@ -61,10 +60,6 @@ export async function PUT(request: NextRequest): Promise<any> {
   console.log("GET_DB_USER:", data_mydb);
 
   try {
-
-    const filteredUsers = mockUser.filter(
-      (user: { email: string }) => user.email === email
-    );
 
     if (data_mydb.length > 0) {
       if(password){
