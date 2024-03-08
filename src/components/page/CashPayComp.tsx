@@ -1,4 +1,6 @@
-import { Button } from "@/components/ui/Button";
+"use client";
+
+import { Button } from "@/components/ui/button";
 import React from "react";
 import Image from "next/image";
 import { Label } from "@/components/ui/label";
@@ -43,7 +45,7 @@ const CashPay = (props: Props) => {
         </div>
         <div className="flex items-center space-x-2 ml-[70px]">
           <RadioGroupItem value="option-three" id="option-three" />
-          <Label htmlFor="option-two">Cash on delivery</Label>
+          <Label htmlFor="option-three">Cash on delivery</Label>
         </div>
       </RadioGroup>
       <div className="flex justify-center w-full h-[350px] overflow-scroll mt-[50px]">
