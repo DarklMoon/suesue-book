@@ -33,7 +33,7 @@ export async function login(userData: {
 
   const user = {
     email: userData.email,
-    name: userData.username,
+    username: userData.username,
     user_id: userData.user_id,
     first_name: userData.first_name,
     last_name: userData.last_name,

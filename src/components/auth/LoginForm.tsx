@@ -56,7 +56,7 @@ const Login = (props: Props) => {
         console.log("DATA ->", data);
         router.refresh()
         showToast({
-          description: "Register success!",
+          description: "Login success!",
           variant: "default",
         });
         router.push("/home");

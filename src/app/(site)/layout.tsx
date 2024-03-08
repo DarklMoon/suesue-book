@@ -1,5 +1,5 @@
 import SideNavbar from "@/components/SideNavBar";
-import TopBar from "@/components/TopBar";
+import TopBar from "@/components/client/TopBar";
 import type { Metadata } from "next";
 import { getSession } from "@/app/api/auth/func/getEnrolls";
 
@@ -14,6 +14,7 @@ export default async function MainLayout({
   children: React.ReactNode;
 }) {
   
+
   const session = await getSession();
   return (
     <div className="flex h-screen overflow-hidden relative">

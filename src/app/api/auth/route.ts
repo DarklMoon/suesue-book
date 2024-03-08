@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import mockUser from "@/lib/mockData.json";
 import bcrypt from "bcrypt";
-import { login } from "./func/getEnrolls";
+import { login, logout } from "./func/getEnrolls";
 import { fetchProducts } from "@/lib/data";
 
 
@@ -48,7 +48,7 @@ export async function PUT(request: NextRequest): Promise<any> {
   const password = (await data).get("password")
 
   const data_mydb = await fetchProducts();
-  
+
   console.log("Email:", email);
   console.log("Password:", password);
   console.log("GET_DB_USER:", data_mydb);
@@ -110,5 +110,17 @@ export async function GET() {
   } catch (error) {
     console.log(error);
     throw error;
+  }
+}
+
+export async function DELETE(){
+  try {
+    logout()
+    return NextResponse.json(
+      { message: "Logout Suess" },
+      { status: 200 }
+    );
+  } catch (error) {
+    
   }
 }

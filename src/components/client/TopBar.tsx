@@ -10,30 +10,57 @@ import {
 import { BellIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { Menu, Transition, Popover } from "@headlessui/react";
 
-import { LogOutIcon } from "lucide-react";
+import { Link, LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
+import { useToast } from "@/components/ui/use-toast";
 
-type Props = {};
+type User = {
+  // Define the user object structure here
+  email: string;
+  username?: string;
+  user_id?: string;
+  first_name?: string;
+  last_name?: string;
+  phone?: string;
+  role?: string;
+  // Add other user properties as needed
+};
 
-export default function TopBar(props: Props) {
-  console.log("PROPS_USER:", props)
+// Define the props for the TopBar component
+interface TopBarProps {
+  user: User;
+}
+
+
+export default function TopBar({ user }: TopBarProps) {
+  const { toast: showToast } = useToast();
+
   const handleLogout = async () => {
-    console.log("LogOut");
-    await Cookies.remove("session");
-    router.push("/login");
+    try {
+      const response = await fetch("api/auth", {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      if (response) {
+        const result = await response.json();
+        console.log("Result: ->", result);
+        router.refresh();
+        showToast({
+          description: "Logout success!",
+          variant: "default",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      console.log("TRANSACTION_ENDING");
+    }
   };
 
-  const user = localStorage.getItem("user");
-  //   if (!user) {
-  //     return null;
-  //   }
-  //   const user1 = JSON.parse(user);
-  let user1 = null;
   const router = useRouter();
-  // useEffect(() => {
-  //   user1 = JSON.parse(localStorage.getItem("user") ?? "null") ?? null;
-  // }, []);
+
   return (
     <div
       className={`fixed top-0 right-0 w-full  py-5 flex justify-between items-center transition-all  `}
@@ -55,9 +82,9 @@ export default function TopBar(props: Props) {
                   alt="profile picture"
                 />
               </picture>
-              {user1 && (
+              {user && (
                 <span className="hidden md:block font-medium text-gray-700">
-                  {user1.fname}
+                  {user.username}
                 </span>
               )}
               <ChevronDownIcon className="ml-2 h-4 w-4 text-gray-700" />
@@ -74,6 +101,15 @@ export default function TopBar(props: Props) {
           >
             <Menu.Items className="absolute right-0 w-56 z-50 mt-2 origin-top-right bg-white rounded shadow-sm">
               <div className="p-1">
+                {/* <Menu.Item>
+                  <Link
+                    href=""
+                    className="flex hover:bg-orange-500 hover:text-white text-gray-700 rounded p-2 text-sm group transition-colors items-center"
+                  >
+                    <CreditCardIcon className="h-4 w-4 mr-2" />
+                    Billing
+                  </Link>
+                </Menu.Item> */}
                 <Menu.Item>
                   <div
                     onClick={handleLogout}
