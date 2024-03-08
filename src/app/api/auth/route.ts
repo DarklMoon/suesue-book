@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import mockUser from "@/lib/mockData.json";
 import bcrypt from "bcrypt";
 import { login, logout } from "./func/getEnrolls";
-import { fetchUser, createUser } from "@/lib/data";
+import { fetchUser, createUser } from "@/lib/db/data";
 
 
 export async function POST(request: NextRequest): Promise<any> {

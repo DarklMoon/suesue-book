@@ -1,4 +1,4 @@
-import { callProducts } from "./db";
+import { callProducts } from "../dbConfig";
 
 type User = {
   user_id: number;

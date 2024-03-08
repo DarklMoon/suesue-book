@@ -1,5 +1,5 @@
 import { float } from "aws-sdk/clients/cloudfront";
-import { callProducts } from "./db";
+import { callProducts } from "../dbConfig";
 import { getSession } from "@/app/api/auth/func/getEnrolls";
 
 type Book = {

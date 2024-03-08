@@ -392,11 +392,11 @@ export default function Profile({ user, data }: ProfileProps) {
       );
     }
 
-    if (selectedAvailableOption !== null) {
-      updatedData = updatedData.filter(
-        (project) => project.isActive === selectedAvailableOption
-      );
-    }
+    // if (selectedAvailableOption !== null) {
+    //   updatedData = updatedData.filter(
+    //     (project) => project.isActive === selectedAvailableOption
+    //   );
+    // }
     setFilteredData(updatedData);
   }, [searchTerm, selectedDateOption, selectedAvailableOption, data]);
 
@@ -477,22 +477,6 @@ export default function Profile({ user, data }: ProfileProps) {
                   {uploading ? "Uploading..." : "Upload"}
                 </Button>
               </form>
-              {/* <UploadButton
-                className="bg-[#64cbc5] text-white rounded-xl mt-3 p-1"
-                endpoint="imageUploader"
-                onClientUploadComplete={(res) => {
-                  // Do something with the response
-                  console.log("Files: ", res);
-                  setLink(res ? res[0].url : "");
-                  alert("Upload Completed");
-                }}
-                onUploadError={(error: Error) => {
-                  // Do something with the error.
-                  alert(`ERROR! ${error.message}`);
-                }}
-              /> */}
-
-              {/* <p>{link}</p> */}
               <div className="text-center	mt-3">
                 <div className="text-2xl font-semibold">Username</div>
                 <div className="text-gray-400 mt-1">Firstname Lastname</div>
@@ -563,24 +547,6 @@ export default function Profile({ user, data }: ProfileProps) {
         </div>
         <div className="w-[100%] h-[100%] border-2 border-gray-500 p-5 my-10 pb-2 mb-10">
           <div className="pt-5 flex">
-            <div className="absolute inset-y-0 end-2 flex items-center pointer-events-none">
-              <svg
-                className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                />
-              </svg>
-            </div>
-
             <Input
               className="border-gray-400 border-2 w-50"
               placeholder="Search..."
@@ -621,16 +587,12 @@ export default function Profile({ user, data }: ProfileProps) {
             {filteredData.map((project, index) => (
               <div
                 key={index}
-                className={`shadow-md rounded-sm bg-gray-100 w-[18em] h-[10em] m-5 p-5 relative ${
-                  project.isActive ? "border-2 border-green-500" : ""
-                }`}
+                className={`shadow-md rounded-sm bg-gray-100 w-[18em] h-[10em] m-5 p-5 relative border-2 border-gray-500`}
               >
                 <div
-                  className={`w-20 text-white text-center absolute top-3 right-5 rounded-sm ${
-                    project.isActive ? "bg-green-500" : "bg-gray-500"
-                  }`}
+                  className={`w-20 text-white text-center absolute top-3 right-5 rounded-sm bg-gray-500`}
                 >
-                  {project.isActive ? "Active" : "InActive"}
+                  {project.isActive}
                 </div>
                 <div className="text-xl">{project.name}</div>
                 <div className="mt-3">
