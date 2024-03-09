@@ -46,3 +46,21 @@ export async function createUser(req: any) {
     throw new Error("Failed to fetch revenue data.");
   }
 }
+
+export async function updateImgUser(req: any) {
+
+    console.log("USER_IMAGE:", req.user_img, "\nUSER_ID:", req.user_id);
+  try {
+
+    const response = await callProducts(
+      "UPDATE USER SET user_img = ? WHERE user_id = ?",
+      [req.user_img, req.user_id]
+    );
+    const data = JSON.stringify(response);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to fetch revenue data.");
+  }
+}

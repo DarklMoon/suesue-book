@@ -32,7 +32,7 @@ const Login = (props: Props) => {
     },
   });
   const { toast: showToast } = useToast();
-  
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const formData: FormData = new FormData();
 
@@ -53,16 +53,20 @@ const Login = (props: Props) => {
       });
       if (response) {
         const data = await response.json();
-        
+
         console.log("DATA ->", data);
         router.refresh()
         showToast({
-          description: data.message+" !",
+          description: "✅  "+ data.message+" !",
           variant: "default",
         });
         router.push("/home");
       }
     } catch (error) {
+      showToast({
+        description: "❌  Email or Password invalid.",
+        variant: "default",
+      });
       console.log(error);
     } finally {
       console.log("TRANSACTION_ENDING");
