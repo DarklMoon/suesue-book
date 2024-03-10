@@ -20,8 +20,8 @@ export async function decrypt(input: string): Promise<any> {
   return payload;
 }
 
-export async function login(userData: {
-  email: string;
+export async function createSession(userData: {
+  email?: string;
   username?: string;
   user_id?: string;
   first_name?: string;

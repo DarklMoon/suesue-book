@@ -89,7 +89,7 @@ export default function Profile({ user, data }: ProfileProps) {
   const [last_name, setLname] = useState<string | undefined>(user.last_name);
   const [phone, setPhone] = useState<string | undefined>(user.phone);
   const [email, setEmail] = useState<string | undefined>(user.email);
-  const [username, setDate] = useState<string | undefined>(
+  const [username, setUsername] = useState<string | undefined>(
     user.username
   );
   const [link, setLink] = useState<string | undefined>(
@@ -153,7 +153,7 @@ export default function Profile({ user, data }: ProfileProps) {
     setFile(e.target.files[0]);
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmitImgProfile = async (e: any) => {
     e.preventDefault();
     if (!file) return;
 
@@ -180,12 +180,17 @@ export default function Profile({ user, data }: ProfileProps) {
 
       //CALL FETCH API TO UPDATE IMAGE PROFILE..
       const formImg = new FormData();
-      if (user.user_id) {
-        formImg.append("user_id", user.user_id.toString());
-      }
-      formImg.append("user_img", linkImgS3);
-      formImg.append("email", user.email)
+
+      if (user.user_id) {formImg.append("user_id", user.user_id.toString());}
+      if (user.username) formImg.append("username", user.username);
+      if (user.first_name) formImg.append("first_name", user.first_name);
+      if (user.last_name) formImg.append("last_name", user.last_name);
+      if (user.phone) formImg.append("phone", user.phone);
+      if (user.role) formImg.append("role", user.role);
       
+      formImg.append("email", user.email);
+      formImg.append("user_img", linkImgS3);
+
       const resUserProfile = await fetch("/api/userProfile/imgProfile", {
         method: "PUT",
         body: formImg,
@@ -198,6 +203,34 @@ export default function Profile({ user, data }: ProfileProps) {
     }
   };
 
+  const updateProfile = async () => {
+
+    try {
+      const formInfo = new FormData();
+
+      if (user.user_id) {formInfo.append("user_id", user.user_id.toString());}
+      if (username) formInfo.append("username", username);
+      if (first_name) formInfo.append("first_name", first_name);
+      if (last_name) formInfo.append("last_name", last_name);
+      if (phone) formInfo.append("phone", phone);
+      if(email){formInfo.append("email", email);}
+      if(link) formInfo.append("user_img", link);
+      if (user.role) formInfo.append("role", user.role);
+      
+      const resUserProfile = await fetch("/api/userProfile", {
+        method: "PUT",
+        body: formInfo,
+      });
+
+      toggleInputState();
+
+      return console.log("Update Profile Success!", resUserProfile)
+    } catch (error) {
+      console.log(error)
+      throw new Error("ERROR: Update Profile");
+      
+    }
+  }
   return (
     <div className="h-screen">
       <div className="p-10">
@@ -212,11 +245,14 @@ export default function Profile({ user, data }: ProfileProps) {
                 className="rounded-full w-40 h-40"
                 width={40}
                 height={40}
-                src={link ?? "https://test-cloudbased.s3.amazonaws.com/Icon-GROUP.png"}
+                src={
+                  link ??
+                  "https://test-cloudbased.s3.amazonaws.com/Icon-GROUP.png"
+                }
                 alt="image description"
               />
               <form
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmitImgProfile}
                 className="items-center flex flex-col justify-center mt-5"
               >
                 <input
@@ -234,9 +270,9 @@ export default function Profile({ user, data }: ProfileProps) {
                 </Button>
               </form>
               <div className="text-center	mt-3">
-                <div className="text-2xl font-semibold">{user.username}</div>
+                <div className="text-2xl font-semibold">{username}</div>
                 <div className="text-gray-400 mt-1">
-                  {user.first_name} {user.last_name}
+                  {first_name} {last_name}
                 </div>
               </div>
             </div>
@@ -285,21 +321,35 @@ export default function Profile({ user, data }: ProfileProps) {
                 />
               </div>
               <div className="pt-5">
-                <p className="mb-2">Birthday</p>
+                <p className="mb-2">Username</p>
                 <Input
                   className="border-gray-400 border-2"
                   placeholder="Role"
-                  type="date"
                   disabled={isInputDisabled}
                   value={username}
-                  onChange={(e) => setDate(e.target.value)}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
             </div>
             <div className="mt-10">
-              <Button className="bg-[#F9BC60]" onClick={toggleInputState}>
-                {buttonText}
-              </Button>
+              {isInputDisabled && (
+                <Button className="bg-[#F9BC60]" onClick={toggleInputState}>
+                  {buttonText}
+                </Button>
+              )}
+              {!isInputDisabled && (
+                <>
+                  <Button className="bg-[#F9BC60] ml-5" onClick={updateProfile}>
+                    Save
+                  </Button>
+                  <Button
+                    className="bg-red-600 ml-5"
+                    onClick={toggleInputState}
+                  >
+                    Cancel
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>

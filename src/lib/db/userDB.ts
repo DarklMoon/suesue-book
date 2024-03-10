@@ -64,3 +64,30 @@ export async function updateImgUser(req: any) {
     throw new Error("Failed to fetch revenue data.");
   }
 }
+
+export async function updateInfoUser(req: any){
+  console.log("DB-USER_INFO:", req)
+  try {
+    // Use straight quotes or backticks for the SQL query string
+    const response = await callProducts(
+      "UPDATE USER\
+       SET first_name = ?, last_name = ?, email = ?, username = ?, phone = ?, user_img = ?\
+       WHERE user_id=?",
+      [
+        req.first_name,
+        req.last_name,
+        req.email,
+        req.username,
+        req.phone,
+        req.user_img,
+        req.user_id
+      ]
+    );
+    const data = JSON.stringify(response);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to fetch revenue data.");
+  }
+}

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import mockUser from "@/lib/mockData.json";
 import bcrypt from "bcrypt";
-import { login, logout } from "./func/getEnrolls";
+import { createSession, logout } from "./func/getEnrolls";
 import { fetchUser, createUser } from "@/lib/db/userDB";
 
 
@@ -66,7 +66,7 @@ export async function PUT(request: NextRequest): Promise<any> {
         const match = await bcrypt.compare(password.toString(), data_mydb[0].password);
         if (match) {
           console.log(data_mydb);
-          const { session, expires } = await login({
+          const { session, expires } = await createSession({
             user_id: data_mydb[0].user_id.toString(),
             email: data_mydb[0].email,
             username: data_mydb[0].username,

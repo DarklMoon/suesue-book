@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { fetchUser, updateImgUser } from "@/lib/db/userDB";
-import { login } from "../../auth/func/getEnrolls";
+import { createSession } from "../../auth/func/getEnrolls";
 
 
 export async function PUT(request: Request) {
@@ -8,29 +8,26 @@ export async function PUT(request: Request) {
   const user_img = (await data).get("user_img");
   const user_id = (await data).get("user_id");
   const email = (await data).get("email");
+  const username = (await data).get("username");
+  const first_name = (await data).get("first_name");
+  const last_name = (await data).get("last_name");
+  const phone = (await data).get("phone");
+  const role = (await data).get("role");
   try {
     console.log("USER_IMAGE:", user_img)
     updateImgUser({user_img, user_id});
-    if (email) {
-        const resUser = await fetchUser({email: email.toString()});
-        console.log("ReUserData:", resUser)
-        if((await resUser).length > 0){
-            const { session, expires } = await login({
-              user_id: resUser[0].user_id.toString(),
-              email: resUser[0].email,
-              username: resUser[0].username,
-              first_name: resUser[0].first_name,
-              last_name: resUser[0].last_name,
-              phone: resUser[0].phone,
-              role: resUser[0].role,
-              user_img: resUser[0].user_img,
-            });
-    }else{
-            throw new Error("Email Not Found");
-        }
-    }else{
-        throw new Error("Email Not Found");
-    }
+    
+      const { session, expires } = await createSession({
+        user_id: user_id?.toString(),
+        email: email?.toString(),
+        username: username?.toString(),
+        first_name: first_name?.toString(),
+        last_name: last_name?.toString(),
+        phone: phone?.toString(),
+        role: role?.toString(),
+        user_img: user_img?.toString(),
+      });
+
     return NextResponse.json({
       message: "✅ Update Image profile success!",
     });
