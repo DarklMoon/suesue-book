@@ -49,7 +49,7 @@ export async function createUser(req: any) {
 
 export async function updateImgUser(req: any) {
 
-    console.log("USER_IMAGE:", req.user_img, "\nUSER_ID:", req.user_id);
+    console.log("DB-USER_IMAGE:", req.user_img, "\nDB-USER_ID:", req.user_id);
   try {
 
     const response = await callProducts(

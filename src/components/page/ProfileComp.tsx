@@ -30,7 +30,7 @@ type User = {
   last_name?: string;
   phone?: string;
   role?: string;
-  user_image?: string;
+  user_img?: string;
   // Add other user properties as needed
 };
 
@@ -92,11 +92,9 @@ export default function Profile({ user, data }: ProfileProps) {
   const [username, setDate] = useState<string | undefined>(
     user.username
   );
-  const [link, setLink] = useState<string>(
-    "https://test-cloudbased.s3.amazonaws.com/Icon-GROUP.png"
+  const [link, setLink] = useState<string | undefined>(
+    user.user_img ?? "https://test-cloudbased.s3.amazonaws.com/Icon-GROUP.png"
   );
-
-  const imageUrl = user.user_image ?? link;
 
   const toggleInputState = () => {
     setIsInputDisabled(!isInputDisabled);
@@ -171,27 +169,28 @@ export default function Profile({ user, data }: ProfileProps) {
       });
 
       const data = await response.json();
-      console.log(data.status);
-      console.log("ImageName: ", data.filename);
+      // console.log("ImageName: ", data.filename);
+
       const formatFilename = data.filename.replace(/ /g, "+");
       console.log("ReFormat: ", data);
-      setLink("https://test-cloudbased.s3.amazonaws.com/" + formatFilename);
-      console.log("LinkImg:", link);
+      
+      const linkImgS3 = "https://test-cloudbased.s3.amazonaws.com/" + formatFilename;
+      setLink(linkImgS3);
       setUploading(false);
 
       //CALL FETCH API TO UPDATE IMAGE PROFILE..
       const formImg = new FormData();
-      if (user.user_id !== undefined) {
+      if (user.user_id) {
         formImg.append("user_id", user.user_id.toString());
       }
-      formImg.append("user_img", link)
+      formImg.append("user_img", linkImgS3);
       formImg.append("email", user.email)
+      
       const resUserProfile = await fetch("/api/userProfile/imgProfile", {
         method: "PUT",
         body: formImg,
       });
-
-      console.log("ResultUploadImgProfile",resUserProfile);
+      // console.log("ResultUploadImgProfile",resUserProfile);
 
     } catch (error) {
       console.log(error);
@@ -213,7 +212,7 @@ export default function Profile({ user, data }: ProfileProps) {
                 className="rounded-full w-40 h-40"
                 width={40}
                 height={40}
-                src={imageUrl}
+                src={link ?? "https://test-cloudbased.s3.amazonaws.com/Icon-GROUP.png"}
                 alt="image description"
               />
               <form
