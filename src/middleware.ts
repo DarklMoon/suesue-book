@@ -30,7 +30,6 @@ export const config = {
     "/managebooks",
     "/updatebooks",
     "/addbook",
-    "/account",
     "/profile"
   ],
 };
