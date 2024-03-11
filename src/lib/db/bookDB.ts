@@ -23,7 +23,7 @@ export async function fetchBook(req: { book_seller: number }): Promise<Book[]> {
     const session = await getSession();
     try {
 
-      const book_seller = JSON.stringify(session.user)
+      const book_seller = JSON.stringify(session.user.id)
       // Use straight quotes or backticks for the SQL query string
       const response = await callProducts("SELECT * FROM BOOK WHERE book_seller=?", [
       book_seller
@@ -42,7 +42,7 @@ export async function fetchmanageBook(req: { book_seller: number }): Promise<Boo
     const session = await getSession();
     try {
 
-      const book_seller = JSON.stringify(session.user)
+      const book_seller = JSON.stringify(session.user.id)
       // Use straight quotes or backticks for the SQL query string
       const response = await callProducts("SELECT * FROM BOOK WHERE NOT book_seller=?", [
         book_seller
@@ -61,7 +61,7 @@ export async function fetchmanageBook(req: { book_seller: number }): Promise<Boo
     const session = await getSession();
     try {
 
-      const book_seller = JSON.stringify(session.user)
+      const book_seller = JSON.stringify(session.user.id)
       // Use straight quotes or backticks for the SQL query string
       const response = await callProducts("INSERT INTO BOOK (book_title, book_author, book_info, book_image, book_price, book_category, book_quantity, book_seller) \
       VALUES(?, ?, ?, ?, ?, ?, 1, ?)", [
@@ -81,11 +81,30 @@ export async function fetchmanageBook(req: { book_seller: number }): Promise<Boo
     const session = await getSession();
     try {
 
-      const book_seller = JSON.stringify(session.user)
+      const book_seller = JSON.stringify(session.user.id)
       // Use straight quotes or backticks for the SQL query string
       const response = await callProducts("UPDATE BOOK SET book_title = ?, book_author = ? , book_info = ? , book_image = ?, book_price = ? , book_category = ?, book_quantity = ? \
       WHERE book_seller = ?", [
         req.book_info, req.book_author, req.book_info, req.book_img, req.book_price, req.book_category,book_seller
+      ]);
+      // const data = JSON.stringify(response);
+
+      return response as Book[];
+    } catch (error) {
+      console.log(error);
+      throw new Error("Failed to fetch revenue data.");
+    }
+  }
+
+  export async function deleteBooks(req: { customer_id: number }): Promise<Book[]> {
+    console.log("ok")
+    const session = await getSession();
+    try {
+
+      const book_seller = JSON.stringify(session.user.id)
+      // Use straight quotes or backticks for the SQL query string
+      const response = await callProducts("SELECT * FROM CART WHERE customer_id = ?", [
+        book_seller
       ]);
       // const data = JSON.stringify(response);
 
