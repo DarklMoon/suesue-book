@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
+
 import {
   Select,
   SelectContent,
@@ -29,6 +30,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+
 
 const formSchema = z.object({
   picture: z.string().min(0, {
@@ -88,6 +90,46 @@ const AddBooks = (props: Props) => {
       console.log("TRANSACTION_ENDING", formData);
     }
   }
+
+  const [file, setFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [link, setLink] = useState<string>(		    "https://test-cloudbased.s3.amazonaws.com/Icon-GROUP.png"		  );
+  const handleFileChange = (e: any) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    if (!file) return;
+
+    setUploading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      console.log("File-Front:", file);
+      const response = await fetch("/api/uploadImgS3", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      console.log(data.status);
+      console.log("ImageName: ", data.filename);
+      const formatFilename = data.filename.replace(/ /g, "+");
+      console.log("ReFormat: ", data);
+      setLink("https://test-cloudbased.s3.amazonaws.com/" + formatFilename);
+      console.log("LinkImg:", link);
+      setUploading(false);
+
+      //CALL FETCH API TO UPDATE IMAGE PROFILE..
+
+
+    } catch (error) {
+      console.log(error);
+      setUploading(false);
+    }
+  };
 
   const router = useRouter();
 
