@@ -1,8 +1,17 @@
-"use client";
-
 import React from "react";
+import Link from "next/link"
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash2, FolderPlus } from "lucide-react";
+import Image from "next/image";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import {
   Dialog,
   DialogContent,
@@ -12,10 +21,13 @@ import {
   DialogTrigger,
   DialogFooter,
 } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+
+import { Pencil, Trash2, FolderPlus } from "lucide-react";
 
 type Props = {};
 
-const Cart = (props: Props) => {
+const Order = (props: Props) => {
   return (
     <>
     <div className="h-screen mt-5 p-10 mt-3 ml-[70px] mr-[50px] border border-2 grid">
@@ -98,17 +110,20 @@ const Cart = (props: Props) => {
             </DialogContent>
           </Dialog>
       </div>
-      {/* error: Checkout button make grid? */}
-      <div className="w-[260px] justify-self-end grid grid-cols2 my-8">
-        
-          <p className="text-base text-right self-end">Subtotal</p>
-          <p className="text-2xl font-bold text-right">150.00 ฿</p>
-          <p className="italic col-span-2 text-right my-2">shipping cost calculated at checkout</p>
-          <button className="rounded-md bg-[#F9BC60] text-[#FFFFFF] font-bold px-10 py-2 col-span-2">Check out -&gt;</button>
-      </div>
-    </div>
+        {/* error: Checkout button make grid? */}
+        <div className="w-[260px] my-8 ml-auto text-right">
+            <p className="text-base self-end">Subtotal</p>
+            <p className="text-2xl font-bold mb-2">150.00 ฿</p>
+            <Link href="/profile">
+                <button className="rounded-md bg-[#F9BC60] text-[#FFFFFF] font-bold px-10 py-2">Back To Profile -&gt;</button>
+            </Link>
+        </div>
+
+
+
+    </div>;
     </>
   );
 };
 
-export default Cart;
+export default Order;

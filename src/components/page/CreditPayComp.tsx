@@ -1,7 +1,9 @@
+"use client"
 import { Button } from "@/components/ui/button";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Label } from "@/components/ui/label";
+import Modal from "@/components/page/ModalComp";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Dialog,
@@ -10,11 +12,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Pencil, Trash2, FolderPlus } from "lucide-react";
 
 type Props = {};
 
 const CreditPay = (props: Props) => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <>
       <div className="w-full h-[70px] mt-[80px] ml-[40px]">
@@ -28,6 +33,7 @@ const CreditPay = (props: Props) => {
         <hr className="w-[250px] h-[10px] border-[black]"></hr>
       </div>
 
+    <div className="flex flex-col items-center">
       <RadioGroup
         className="flex justify-center items-center"
         defaultValue="option-two"
@@ -45,38 +51,95 @@ const CreditPay = (props: Props) => {
           <Label htmlFor="option-two">Cash on delivery</Label>
         </div>
       </RadioGroup>
-      <hr className="flex justify-center items-center w-[800px] h-[10px] border-[black]"></hr>
+      <div className="border-b border-black w-[600px] mt-2"></div>
+    </div>
       
 
       <div className="w-full h-[500px] mt-[30px] flex justify-center items-center">
         <div className="w-[480px] h-[500px] ml-8 mt-6">
           <div className="flex flex-col">
             <div className="flex flex-row">
-              <div className="border-2 w-[400px] rounded p-4">
-                <input id="item1" className="peer/item1"  type="radio" name="status" value="item1"/>
-                <label htmlFor="item1" className="peer-checked/item1:border-[#FFA826] peer-checked/item1:bg-[#FFF1DC]&border-2&text-black">
-                  <p>Credit Name</p>
-                  <p>Expire Nov 2026</p>
+              <div className="w-[400px] rounded p-4 flex items-start">
+                <input id="item1" className="peer/item1 mt-1" type="radio" name="status" value="item1" />
+                <label htmlFor="item1" className="ml-2 relative top-[-2px]">
+                  <div className="text-black">
+                    <p className="font-bold">Credit Name</p>
+                    <p>Expire Nov 2026</p>
+                  </div>
                 </label>
               </div>
-              <div className="">
-                icon
+
+
+              <div className="flex flex-row items-center">
+                <span className="mx-4">
+                  <Pencil color="black"></Pencil>
+                </span>
+                <Dialog>
+                  <DialogTrigger>
+                    <span className="">
+                      <Trash2 color="black" />
+                    </span>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Are you absolutely sure?</DialogTitle>
+                      <DialogDescription>
+                        This action cannot be undone. This will permanently
+                        delete your account and remove your data from our
+                        servers.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                      <Button type="submit">Confirm</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
             <div className="flex flex-row">
-              <div className="border-2 w-[400px] rounded p-4">
-                <input id="item2" className="peer/item2"  type="radio" name="status" value="item2"/>
-                <label htmlFor="item2" className="peer-checked/item2:border-[#FFA826] peer-checked/item2:bg-[#FFF1DC]&border-2&text-black">
-                  <p>Credit Name</p>
-                  <p>Expire Nov 2026</p>
+              <div className="w-[400px] rounded p-4 flex items-start">
+                <input id="item2" className="peer/item1 mt-1" type="radio" name="status" value="item1" />
+                <label htmlFor="item2" className="ml-2 relative top-[-2px]">
+                  <div className="text-black">
+                    <p className="font-bold">Credit Name</p>
+                    <p>Expire Nov 2026</p>
+                  </div>
                 </label>
               </div>
-              <div className="">
-                icon
+
+
+              <div className="flex flex-row items-center">
+                <span className="mx-4">
+                  <Pencil color="black"></Pencil>
+                </span>
+                <Dialog>
+                  <DialogTrigger>
+                    <span className="">
+                      <Trash2 color="black" />
+                    </span>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Are you absolutely sure?</DialogTitle>
+                      <DialogDescription>
+                        This action cannot be undone. This will permanently
+                        delete your account and remove your data from our
+                        servers.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                      <Button type="submit">Confirm</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </div>
-          <hr className="mt-6 w-full h-[10px] border-[black]"></hr>
+          <hr className="mt-6 w-full h-[10px] border-[black] block"></hr>
+          <div className="flex justify-end mt-8">
+            <Button onClick={() => setShowModal(true)}>Add new Credit Card +</Button>
+            <Modal isVisible={showModal} onClose={() => setShowModal(false)}/>
+          </div>
         </div>
         
 
