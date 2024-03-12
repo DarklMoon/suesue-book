@@ -13,31 +13,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { float } from "aws-sdk/clients/frauddetector";
+import { Book, User } from "@/type"
 
-type Book = {
-  book_id?: string;
-  book_title?: string;
-  book_author?: string;
-  book_info?: string;
-  book_image?: string;
-  book_price?: float;
-  category_name?: string;
-  book_quantity?: string;
-  book_seller?: string;
-};
-
-type User = {
-  // Define the user object structure here
-  email: string;
-  username?: string;
-  user_id?: string;
-  first_name?: string;
-  last_name?: string;
-  phone?: string;
-  role?: string;
-  user_img?: string;
-  // Add other user properties as needed
-};
 interface ProfileProps {
   user: User;
   data: Book[];

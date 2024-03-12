@@ -1,16 +1,5 @@
 import { callProducts } from "../dbConfig";
-
-type User = {
-  user_id: number;
-  first_name: string;
-  last_name: string;
-  email: string;
-  username: string;
-  password: string;
-  phone: string;
-  role: string;
-  user_img: string;
-};
+import { User } from "@/type"
 
 export async function fetchUser(req: { email: string }): Promise<User[]> {
   console.log("FetchUser:", req);

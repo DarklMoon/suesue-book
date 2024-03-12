@@ -13,26 +13,8 @@ import {
 } from "@/components/ui/select";
 
 import Image from "next/image";
+import { User, Project } from "@/type";
 
-export interface Project {
-  orderId: string;
-  date: string;
-  totalItems: number;
-  totalPrice: string;
-}
-
-type User = {
-  // Define the user object structure here
-  email: string;
-  username?: string;
-  user_id?: string;
-  first_name?: string;
-  last_name?: string;
-  phone?: string;
-  role?: string;
-  user_img?: string;
-  // Add other user properties as needed
-};
 
 // Define the props for the TopBar component
 interface ProfileProps {
