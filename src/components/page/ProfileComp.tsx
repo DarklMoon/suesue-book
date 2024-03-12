@@ -18,8 +18,8 @@ const Profile = (props: Props) => {
     <div className="relative grid grid-cols-2 gap-4 mt-[50px] ">
 
       {/* First column */}
-      <div className="flex border justify-center">
-        <div className="border border-2 border-white flex justify-center grid grid-row-2">
+      <div className="flex justify-center">
+        <div className="flex justify-center grid grid-row-2">
           {/* Profile template */}
           <div className="flex justify-center items-center">
             <img className="rounded-full w-36 h-36" src="https://i.pinimg.com/564x/90/59/96/90599631f3186f08e73ec8553c00bda2.jpg" alt="Extra large avatar"></img>

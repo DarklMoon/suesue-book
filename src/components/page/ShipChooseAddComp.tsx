@@ -8,9 +8,9 @@ const shipping = () => {
   return (
     <>
     <div className="grid grid-rows-2">
-      <div className="border rounded-lg inline-block flex flex-row items-start">
+      <div className="border rounded-lg inline-block flex items-start p-4">
         <input id="address1" className="peer/address1"  type="radio" name="status" value="address1"/>
-        <label htmlFor="address1" className="peer-checked/address1:border-[#FFA826] peer-checked/address1:bg-[#FFF1DC]&border-2&text-black">
+        <label htmlFor="address1" className="peer-checked/address1:border-[#FFA826] peer-checked/address1:bg-[#FFF1DC]&border-2&text-black ml-2 relative top-[-5px]">
           <p className="font-bold">Rertnarith thertsati</p>
           <p>สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง ซอย ฉลองกรุง 1<br/>
           แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพมหานคร 10520 <br/>
@@ -18,9 +18,9 @@ const shipping = () => {
           </p>
         </label>
       </div>
-      <div>
+      <div className="border rounded-lg inline-block flex items-start p-4">
         <input id="address2" className="peer/draft" type="radio" name="status" value="address2"/>
-        <label htmlFor="address2" className="peer-checked/draft:text-sky-500">
+        <label htmlFor="address2" className="peer-checked/address1:border-[#FFA826] peer-checked/address1:bg-[#FFF1DC]&border-2&text-black ml-2 relative top-[-5px]">
           <p className="font-bold">Rertnarith thertsati</p>
           <p>สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง ซอย ฉลองกรุง 1<br/>
           แขวงลาดกระบัง เขตลาดกระบัง กรุงเทพมหานคร 10520 <br/>

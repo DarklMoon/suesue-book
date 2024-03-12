@@ -8,7 +8,7 @@ const shipping = () => {
   return (
     <>
     <div className="relative">
-            <form className="table w-full border">
+            <form className="table w-fullx">
               <div className="inline-block mt-6x mb-1">
                 <label className="inline-block mx-1">
                   <input type="text" className="peer border border-[#8C8C8C] pl-4 py-1 w-[276.5px]" placeholder="Name"/>

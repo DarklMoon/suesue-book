@@ -21,7 +21,7 @@ export default function MainLayout({
         <p className="text-sm text-[#AAAAAA] inline-block ml-3">Select your address</p>
       </div>
       <div className="flex grid grid-cols-11 grid-row-4 gap-2">
-        <div className="row-span-1 border-2 border-black col-span-6 flex items-center justify-center">
+        <div className="row-span-1 border-b-2 border-black col-span-6 flex items-center justify-center">
           <AddressManagement/>
         </div>
         <div className="row-span-4 col-span-5 border-l-2 border-[#000000]">

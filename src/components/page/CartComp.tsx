@@ -18,7 +18,7 @@ type Props = {};
 const Cart = (props: Props) => {
   return (
     <>
-    <div className="h-screen mt-5 p-10 mt-3 ml-[70px] mr-[50px] border border-2 grid">
+    <div className="h-screen mt-5 p-10 mt-3 ml-[70px] mr-[50px] grid">
       <div className="flex mt-[30px] justify-self-center justify-center pb-[10px] inline w-[150px]">
         <p className="text-2xl font-bold">Your Cart</p>        
       </div>
