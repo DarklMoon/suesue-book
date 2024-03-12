@@ -13,18 +13,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { float } from "aws-sdk/clients/frauddetector";
-import { number } from "zod";
 
 type Book = {
-  book_id: string;
-  book_title: string;
-  book_author: string;
-  book_info: string;
-  book_image: string;
-  book_price: float;
-  category_name: string;
-  book_quantity: string;
-  book_seller: string;
+  book_id?: string;
+  book_title?: string;
+  book_author?: string;
+  book_info?: string;
+  book_image?: string;
+  book_price?: float;
+  category_name?: string;
+  book_quantity?: string;
+  book_seller?: string;
 };
 
 type User = {
@@ -74,6 +73,11 @@ const mockData: Book[] = [
 export default function HomeComp({ user, data }: ProfileProps) {
   console.log("USER-Home:", user);
 
+  const handleBookClick = (data: any) => {
+    data.user_id = user.user_id;
+    window.location.href = `/bookDetail?data=${JSON.stringify(data)}`;
+  };
+
   const [filteredData, setFilteredData] = useState<Book[]>(data || mockData);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedCategories, setSelectedCategories] = useState<string | null>(
@@ -88,7 +92,7 @@ export default function HomeComp({ user, data }: ProfileProps) {
     let updatedData = data ? [...data] : [];
 
     updatedData = (data || mockData).filter((book) =>
-      book.book_title.toLowerCase().includes(searchTerm.toLowerCase())
+      book?.book_title?.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     if (selectedCategories !== null) {
@@ -142,7 +146,7 @@ export default function HomeComp({ user, data }: ProfileProps) {
       <div className="flex flex-wrap p-5">
         {filteredData.map((book, index) => (
           <div key={index} className="p-10">
-            <BookComp data={book} />
+            <BookComp data={book} onClick={() => handleBookClick(book)} />
           </div>
         ))}
       </div>

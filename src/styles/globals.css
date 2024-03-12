@@ -8,6 +8,12 @@
   overflow: hidden;
 }
 
+.image-container-2{
+  width: 500px; /* Set a fixed width */
+  height: 1000px; /* Set a fixed height */
+  overflow: hidden;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

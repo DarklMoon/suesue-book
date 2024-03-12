@@ -1,5 +1,5 @@
 import React from "react";
-import AddHome from "@/components/page/HomeComp";
+import HomeComp from "@/components/page/HomeComp";
 import { getSession } from "@/app/api/auth/func/getEnrolls";
 import { fetchAllBook } from "@/lib/db/bookDB";
 
@@ -8,7 +8,7 @@ const Home = async () => {
   const allBook = await fetchAllBook();
   console.log("All-Book-API", allBook);
 
-  return <AddHome user={session.user} data={allBook}></AddHome>;
+  return <HomeComp user={session.user} data={allBook}></HomeComp>;
 };
 
 export default Home;

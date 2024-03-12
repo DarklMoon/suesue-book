@@ -1,5 +1,5 @@
 import React from "react";
-import AddProfile from "@/components/page/ProfileComp";
+import ProfileComp from "@/components/page/ProfileComp";
 import { getSession } from "@/app/api/auth/func/getEnrolls";
 
 export interface Project {
@@ -46,7 +46,7 @@ interface ProfileProps {
 const Profile = async ({ data }: ProfileProps) => {
   const session = await getSession();
 
-  return <AddProfile user={session.user} data={data}></AddProfile>;
+  return <ProfileComp user={session.user} data={data}></ProfileComp>;
 };
 
 export default Profile;
