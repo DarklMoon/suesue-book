@@ -1,52 +1,14 @@
 import React from "react";
 import AddHome from "@/components/page/HomeComp";
 import { getSession } from "@/app/api/auth/func/getEnrolls";
+import { fetchAllBook } from "@/lib/db/bookDB";
 
-export interface Project {
-  orderId: string;
-  date: string;
-  totalItems: number;
-  totalPrice: string;
-}
-const mockData: Project[] = [
-  {
-    orderId: "#000-001",
-    date: "2022-01-01",
-    totalItems: 5,
-    totalPrice: "100฿",
-  },
-  {
-    orderId: "#000-002",
-    date: "2022-02-01",
-    totalItems: 8,
-    totalPrice: "100฿",
-  },
-  {
-    orderId: "#000-003",
-    date: "2022-02-01",
-    totalItems: 8,
-    totalPrice: "100฿",
-  },
-  {
-    orderId: "#000-004",
-    date: "2022-02-01",
-    totalItems: 8,
-    totalPrice: "100฿",
-  },
-  {
-    orderId: "#000-005",
-    date: "2022-02-01",
-    totalItems: 8,
-    totalPrice: "100฿",
-  },
-];
-interface ProfileProps {
-  data: Project[];
-}
-const Home = async ({ data }: ProfileProps) => {
+const Home = async () => {
   const session = await getSession();
+  const allBook = await fetchAllBook();
+  console.log("All-Book-API", allBook);
 
-  return <AddHome user={session.user} data={data}></AddHome>;
+  return <AddHome user={session.user} data={allBook}></AddHome>;
 };
 
 export default Home;

@@ -34,6 +34,7 @@ export async function GET(request: NextRequest): Promise<any> {
   try {
     console.log("GET_METHOD")
     return NextResponse.json({
+      test: "GET_METHOD"
     });
 
   } catch (error) {
