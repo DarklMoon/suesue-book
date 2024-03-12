@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { float } from "aws-sdk/clients/cloudfront";
 import { Button } from "@/components/ui/button";
-import router from "next/router";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 
 type Book = {
@@ -42,11 +43,16 @@ const BookDetail = () => {
     fetchData();
   }, []);
 
+
+  const { toast: showToast } = useToast();
+  const router = useRouter();
+  
   const addToCartHandler = async () => {
     const formData: FormData = new FormData();
     
-    if(bookData?.book_id?.toString()){formData.append("bood_id", bookData?.book_id?.toString())}
-    if(bookData?.user_id?.toString()){formData.append("bood_id", bookData?.user_id?.toString());}
+    if(bookData?.book_id?.toString()){formData.append("book_id", bookData?.book_id?.toString())}
+    if(bookData?.user_id?.toString()){formData.append("user_id", bookData?.user_id?.toString());}
+    if(bookData?.book_quantity?.toString()){formData.append("book_quantity", bookData?.book_quantity?.toString());}
 
     try {
       const response = await fetch("api/cart", {
@@ -118,19 +124,3 @@ const BookDetail = () => {
 };
 
 export default BookDetail;
-
-
-
-function showToast(arg0: { description: string; variant: string; }) {
-    throw new Error("Function not implemented.");
-}
-//   const urlSearchParams = new URLSearchParams(window.location.search);
-//   const params = Object.fromEntries(urlSearchParams.entries());
-//   let bookData = "";
-
-//   // Access the 'data' parameter and parse it
-//   const data = params.data;
-//   if (data) {
-//     bookData = JSON.parse(data);
-//     console.log("Book Data:", bookData);
-//   }

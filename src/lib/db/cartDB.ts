@@ -10,17 +10,14 @@ type Cart = {
   };
 
   export async function createCart(req: { book_id: number, book_quantity:number, customer_id:number }): Promise<Cart[]> {
-    console.log("FetchUser:", req);
-    const session = await getSession();
+    console.log("CreatCart-DB:", req);
     try {
 
-      const customer_id = JSON.stringify(session.user.id)
       // Use straight quotes or backticks for the SQL query string
       const response = await callProducts("INSERT INTO CART (book_id, book_quantity, customer_id) \
-      VALUES(?, 1, ?)", [
-        req.book_id, customer_id
+      VALUES(?, ?, ?)", [
+        req.book_id, req.book_quantity, req.customer_id
       ]);
-      // const data = JSON.stringify(response);
 
       return response as Cart[];
     } catch (error) {
