@@ -30,11 +30,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { User } from "@/type"
 
 
 const formSchema = z.object({
-  picture: z.string().min(0, {
-    message: "pls select a picture",
+  title: z.string().min(2, {
+    message: "Title must be at least 2 characters.",
   }),
   author: z.string().min(2, {
     message: "Author must be at least 2 characters.",
@@ -43,17 +44,16 @@ const formSchema = z.object({
   categories: z.string().min(0, {
     message: "Category is required",
   }),
-  price: z.string().min(2,{message:"price must be required"})
+  price: z.string().min(2, { message: "price must be required" }),
 });
 
-type Props = {};
 
-const AddBooks = (props: Props) => {
+const AddBooks = ({ user }: User) => {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      picture: "",
+      title: "",
       author: "",
       description: "",
       categories: "",
@@ -61,44 +61,15 @@ const AddBooks = (props: Props) => {
     },
   });
 
-  // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    const formData: FormData = new FormData();
-    formData.append("picture", values.picture);
-    formData.append("author", values.author);
-    formData.append("description", values.description);
-    formData.append("categories", values.categories);
-    formData.append("price", values.price.toString());
-
-    try {
-      const response = await fetch("api/books", {
-        method: "POST",
-        body: formData,
-        headers: {
-          Accept: "application/json",
-        },
-      });
-      if (response) {
-        const data = await response.json();
-        router.push("/managebooks")
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      console.log("TRANSACTION_ENDING", formData);
-    }
-  }
-
+  const [link, setLink] = useState<string | undefined>("https://test-cloudbased.s3.amazonaws.com/Icon-GROUP.png");
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
-  const [link, setLink] = useState<string>(		    "https://test-cloudbased.s3.amazonaws.com/Icon-GROUP.png"		  );
+
   const handleFileChange = (e: any) => {
     setFile(e.target.files[0]);
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmitImgProfile = async (e: any) => {
     e.preventDefault();
     if (!file) return;
 
@@ -114,22 +85,54 @@ const AddBooks = (props: Props) => {
       });
 
       const data = await response.json();
-      console.log(data.status);
-      console.log("ImageName: ", data.filename);
+      // console.log("ImageName: ", data.filename);
+
       const formatFilename = data.filename.replace(/ /g, "+");
       console.log("ReFormat: ", data);
-      setLink("https://test-cloudbased.s3.amazonaws.com/" + formatFilename);
-      console.log("LinkImg:", link);
+
+      const linkImgS3 =
+        "https://test-cloudbased.s3.amazonaws.com/" + formatFilename;
+      setLink(linkImgS3);
       setUploading(false);
-
-      //CALL FETCH API TO UPDATE IMAGE PROFILE..
-
 
     } catch (error) {
       console.log(error);
       setUploading(false);
     }
   };
+
+  // 2. Define a submit handler.
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    const formData: FormData = new FormData();
+
+    if(link){formData.append("book_image", link);}
+    formData.append("book_seller", user.user_id);
+    formData.append("book_title", values.title);
+    formData.append("book_author", values.author);
+    formData.append("book_info", values.description);
+    formData.append("book_category", values.categories);
+    formData.append("book_price", values.price.toString());
+
+    try {
+      const response = await fetch("api/books", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      if (response) {
+        const data = await response.json();
+        router.push("/home");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      console.log("TRANSACTION_ENDING", formData);
+    }
+  }
 
   const router = useRouter();
 
@@ -148,25 +151,52 @@ const AddBooks = (props: Props) => {
 
       <div className="flex justify-center w-full h-[450px] mt-[5px]">
         <div className="w-[400px] h-[650px]">
-          <div className="flex justify-center w-full">
-            <Image src="/profile.png" width={150} height={200} alt="test" />
+          <div className="flex flex-col justify-center w-full">
+            <Image
+              className="rounded-full w-40 h-40"
+              width={40}
+              height={40}
+              src={
+                link ??
+                "https://test-cloudbased.s3.amazonaws.com/Icon-GROUP.png"
+              }
+              alt="image description"
+            />
+            <form
+              onSubmit={handleSubmitImgProfile}
+              className="items-center flex flex-col justify-center mt-5"
+            >
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="w-[15em]"
+              />
+              <Button
+                type="submit"
+                disabled={!file || uploading}
+                className="bg-[#F9BC60] text-white rounded-xl mt-3 p-2 px-5"
+              >
+                {uploading ? "Uploading..." : "Upload"}
+              </Button>
+            </form>
           </div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
+
               <FormField
                 control={form.control}
-                name="picture"
+                name="title"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Picture</FormLabel>
+                  <FormItem className="mt-[10px]">
+                    <FormLabel>Title</FormLabel>
                     <FormControl>
-                      <Input id="picture" type="file" {...field} />
+                      <Input {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
               <FormField
                 control={form.control}
                 name="author"
@@ -211,10 +241,14 @@ const AddBooks = (props: Props) => {
                         </SelectTrigger>
                         <SelectContent>
                           <SelectGroup {...field}>
-                            <SelectItem value="manga">Manga</SelectItem>
-                            <SelectItem value="novel">Novel</SelectItem>
-                            <SelectItem value="how-to">How-To</SelectItem>
-                            <SelectItem value="comedy">Comedy</SelectItem>
+                            <SelectItem value="1">Fiction</SelectItem>
+                            <SelectItem value="2">Non-Fiction</SelectItem>
+                            <SelectItem value="3">Mystery/Thriller</SelectItem>
+                            <SelectItem value="4">Science Fiction</SelectItem>
+                            <SelectItem value="5">Fantasy</SelectItem>
+                            <SelectItem value="6">Romance</SelectItem>
+                            <SelectItem value="7">Horror</SelectItem>
+                            <SelectItem value="8">Manga</SelectItem>
                           </SelectGroup>
                         </SelectContent>
                       </Select>

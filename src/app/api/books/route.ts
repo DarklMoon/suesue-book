@@ -1,19 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/app/api/auth/func/getEnrolls";
+import { addBook } from "@/lib/db/bookDB";
 
 
 export async function POST(request: NextRequest): Promise<any> {
     const data = request.formData();
-    const picture = (await data).get("picture");
-    const book_name = (await data).get("book_name");
-    const author = (await data).get("author");
-    const description = (await data).get("description");
-    const price = (await data).get("price");
-    const category = (await data).get("category");
+    const book_seller = (await data).get("book_seller");
+    const book_author = (await data).get("book_author");
+    const book_info = (await data).get("book_info");
+    const book_category = (await data).get("book_category");
+    const book_price = (await data).get("book_price");
+    const book_title = (await data).get("book_title");
+    const book_image = (await data).get("book_image");
     try {
-      if (picture) {
-        console.log("aa")
-      }
+      let userData = {
+        book_seller: book_seller,
+        book_author: book_author,
+        book_info: book_info,
+        book_category: book_category,
+        book_price: book_price,
+        book_title: book_title,
+        book_image: book_image,
+      };
+      addBook(userData)
+
+      
     } catch (error) {
       console.log(error);
       throw error;

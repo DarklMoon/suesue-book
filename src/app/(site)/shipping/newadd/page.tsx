@@ -1,12 +1,12 @@
 import React from "react";
-import AddNewAdd from "@/components/page/ShipNewAddComp";
+import ShipNewAddComp from "@/components/page/ShipNewAddComp";
+import { getSession } from "@/app/api/auth/func/getEnrolls";
 
 
-type Props = {};
+const  shipping = async () => {
+  const session = await getSession();
 
-const  shipping = async (props: Props) => {
-
-  return <AddNewAdd></AddNewAdd>;
+  return <ShipNewAddComp user={session.user}></ShipNewAddComp>;
 }
 
 export default shipping;

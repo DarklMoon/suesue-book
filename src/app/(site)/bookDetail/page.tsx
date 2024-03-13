@@ -66,7 +66,7 @@ const BookDetail = () => {
         const data = await response.json();
         console.log("Add to Cart:", data);
         showToast({
-          description: "Add to Cart success!",
+          description: "✅ Add to Cart success!",
           variant: "default",
         });
 

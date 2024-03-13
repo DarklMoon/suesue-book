@@ -1,4 +1,4 @@
-import { createCart } from "@/lib/db/cartDB";
+import { createCart, deleteCart } from "@/lib/db/cartDB";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -42,19 +42,12 @@ export async function GET(request: NextRequest): Promise<any> {
 
 export async function DELETE(request: NextRequest): Promise<any> {
   const data = request.formData();
-  const picture = (await data).get("picture");
-  const book_name = (await data).get("book_name");
-  const author = (await data).get("author");
-  const description = (await data).get("description");
+  const cart_id = Number((await data).get("cart_id"));
   try {
-    if (picture) {
-      console.log("aa")
-    }
+   deleteCart({cart_id})
+    return NextResponse.json({message: "✅ Delete Success!"});
   } catch (error) {
     console.log(error);
     throw error;
   }
-  return NextResponse.json({
-
-    });
 }

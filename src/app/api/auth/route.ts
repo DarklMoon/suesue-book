@@ -66,16 +66,18 @@ export async function PUT(request: NextRequest): Promise<any> {
         const match = await bcrypt.compare(password.toString(), data_mydb[0].password);
         if (match) {
           console.log(data_mydb);
-          const { session, expires } = await createSession({
-            user_id: data_mydb[0].user_id.toString(),
-            email: data_mydb[0].email,
-            username: data_mydb[0].username,
-            first_name: data_mydb[0].first_name,
-            last_name: data_mydb[0].last_name,
-            phone: data_mydb[0].phone,
-            role: data_mydb[0].role,
-            user_img: data_mydb[0].user_img,
-          });
+          if (data_mydb[0].user_id){
+            const { session, expires } = await createSession({
+              user_id: data_mydb[0].user_id.toString(),
+              email: data_mydb[0].email,
+              username: data_mydb[0].username,
+              first_name: data_mydb[0].first_name,
+              last_name: data_mydb[0].last_name,
+              phone: data_mydb[0].phone,
+              role: data_mydb[0].role,
+              user_img: data_mydb[0].user_img,
+            });
+          }
     
           return NextResponse.json({
             message: "Login Success"

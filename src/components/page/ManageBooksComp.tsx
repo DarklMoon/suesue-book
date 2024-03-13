@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import React from "react";
 import Image from "next/image";
@@ -21,12 +22,13 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-
+import { useRouter } from "next/navigation";
 import { Pencil, Trash2, FolderPlus } from "lucide-react";
 
 type Props = {};
 
 const ManageBooks = (props: Props) => {
+  const router = useRouter();
   return (
     <>
       <div className="w-full h-[70px] mt-[80px] ml-[40px]">
@@ -39,7 +41,9 @@ const ManageBooks = (props: Props) => {
         </h1>
         <hr className="w-[250px] h-[10px] border-[black]"></hr>
       </div>
-      <Button className="ml-[40px]">
+      <Button className="ml-[40px]" onClick={()=>{
+        router.push("/addbooks");
+      }}>
         <span>
           <FolderPlus />
         </span>
@@ -71,7 +75,7 @@ const ManageBooks = (props: Props) => {
                   <div>
                     <h1 className="text-[20px] font-bold">Dumb books</h1>
                     <p className="text-[12px] opacity-25">Categories</p>
-                    <p className="text-[12px] opacity-25">By Vendor's name</p>
+                    <p className="text-[12px] opacity-25">By name</p>
                   </div>
                 </TableCell>
                 <TableCell>50 ฿</TableCell>

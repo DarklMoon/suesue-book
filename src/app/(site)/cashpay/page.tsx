@@ -1,12 +1,12 @@
 import React from "react";
-import AddCashPay from "@/components/page/CashPayComp";
+import CashPayComp from "@/components/page/CashPayComp";
 
 
 type Props = {};
 
 const  CashPay = async (props: Props) => {
 
-  return <AddCashPay></AddCashPay>;
+  return <CashPayComp></CashPayComp>;
 }
 
 export default CashPay;

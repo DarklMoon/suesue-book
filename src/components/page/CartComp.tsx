@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2, FolderPlus } from "lucide-react";
 import {
@@ -15,6 +15,7 @@ import {
 import Image from "next/image";
 import { float } from "aws-sdk/clients/cloudfront";
 import { Cart, User } from "@/type";
+import { useToast } from "@/components/ui/use-toast";
 
 interface CartProps {
   user: User;
@@ -23,6 +24,39 @@ interface CartProps {
 
 function CartItem({ book }: { book: Cart }) {
   console.log("Book-Loop:", book);
+
+  const { toast: showToast } = useToast();
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const deleteCartHandler = async (cart_id: any) => {
+    console.log("DeleteCartHandler:", cart_id);
+    const formData = new FormData();
+    if (cart_id) {
+      formData.append("cart_id", cart_id);
+    }
+
+    try {
+      const response = await fetch("api/cart", {
+        method: "DELETE",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      if (response) {
+        showToast({
+          description: "✅ Delete Cart success!",
+          variant: "default",
+        });
+      }
+      setDialogOpen(false);
+      window.location.reload();
+      console.log("DeleteCart:", response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="border-b-2 border-[#B7B7B7] w-full pt-8 pb-4 flex flex-row justify-between  content-center">
       <div className="w-3/6 font-bold flex flex-row">
@@ -53,14 +87,19 @@ function CartItem({ book }: { book: Cart }) {
         {book.cart_quantity}
       </p>
       <p className="w-1/7 text-right font-bold self-center ">
-        {book.book_price} ฿
+        {typeof book.book_price === "number" &&
+        typeof book.cart_quantity === "number"
+          ? `${(book.book_price * book.cart_quantity)?.toFixed(2) || "N/A"} ฿`
+          : "N/A"}
       </p>
+
       <Dialog>
         <DialogTrigger>
           <span>
             <Trash2
               color="red"
               className="inline-block w-1/7 text-right self-center font-bold"
+              onClick={() => setDialogOpen(true)}
             />
           </span>
         </DialogTrigger>
@@ -73,7 +112,8 @@ function CartItem({ book }: { book: Cart }) {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button type="submit">Confirm</Button>
+            <Button type="button" onClick={() => deleteCartHandler(book.cart_id)}>Confirm</Button>
+              <Button type="button" onClick={() => setDialogOpen(false)}>Cancel</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -82,6 +122,10 @@ function CartItem({ book }: { book: Cart }) {
 }
 
 export default function CartComp({ user, data }: CartProps) {
+  
+  const checkOutHandler=()=>{
+     window.location.href = `/shipping/chooseadd`;
+  }
   console.log("CartComp_USER:", user, data);
   return (
     <div className="h-screen mt-8 p-10 ml-[70px] mr-[50px] grid">
@@ -107,13 +151,13 @@ export default function CartComp({ user, data }: CartProps) {
         {/* error: Checkout button make grid? */}
         <div className="w-[260px] justify-self-end grid grid-cols2 my-8">
           <p className="text-base text-right self-end">Subtotal</p>
-          <p className="text-2xl font-bold text-right">150.00 ฿</p>
+          <p className="text-2xl font-bold text-right">{data[0].total_price} ฿</p>
           <p className="italic col-span-2 text-right my-2">
             shipping cost calculated at checkout
           </p>
-          <button className="rounded-md bg-[#F9BC60] text-[#FFFFFF] font-bold px-10 py-2 col-span-2">
+          <Button onClick={checkOutHandler} className="rounded-md bg-[#F9BC60] text-[#FFFFFF] font-bold px-10 py-2 col-span-2">
             Check out -&gt;
-          </button>
+          </Button>
         </div>
       </div>
   );

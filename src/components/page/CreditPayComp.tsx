@@ -15,10 +15,12 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Pencil, Trash2, FolderPlus } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
 const CreditPay = (props: Props) => {
+  const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   return (
     <>
@@ -157,7 +159,7 @@ const CreditPay = (props: Props) => {
                 <h1 className="text-[20px] font-bold">100.00 ฿</h1>
               </div>
               <p className="text-[15px] opacity-25">Categories</p>
-              <p className="text-[15px] opacity-25">By Vendor's name</p>
+              <p className="text-[15px] opacity-25">By name</p>
             </div>
             <div className="w-[400px] h-[80px]">
               <div className="w-full h-[30px] flex justify-between">
@@ -165,7 +167,7 @@ const CreditPay = (props: Props) => {
                 <h1 className="text-[20px] font-bold">100.00 ฿</h1>
               </div>
               <p className="text-[15px] opacity-25">Categories</p>
-              <p className="text-[15px] opacity-25">By Vendor's name</p>
+              <p className="text-[15px] opacity-25">By name</p>
             </div>
             <div className="w-[400px] h-[80px]">
               <div className="w-full h-[30px] flex justify-between">
@@ -173,7 +175,7 @@ const CreditPay = (props: Props) => {
                 <h1 className="text-[20px] font-bold">100.00 ฿</h1>
               </div>
               <p className="text-[15px] opacity-25">Categories</p>
-              <p className="text-[15px] opacity-25">By Vendor's name</p>
+              <p className="text-[15px] opacity-25">By name</p>
             </div>
             <div className="w-[400px] h-[80px]">
               <div className="w-full h-[30px] flex justify-between">
@@ -181,7 +183,7 @@ const CreditPay = (props: Props) => {
                 <h1 className="text-[20px] font-bold">100.00 ฿</h1>
               </div>
               <p className="text-[15px] opacity-25">Categories</p>
-              <p className="text-[15px] opacity-25">By Vendor's name</p>
+              <p className="text-[15px] opacity-25">By name</p>
             </div>
           </div>
           <hr className="w-full h-[10px] border-[black] mt-[20px]"></hr>
@@ -200,7 +202,9 @@ const CreditPay = (props: Props) => {
           </div>
 
           <div className="w-full h-[40px] flex justify-end mt-[10px]">
-            <Button>Submit</Button>
+            <Button onClick={()=>{
+              router.push("/thxpay")
+              }}>Submit</Button>
           </div>
         </div>
       </div>

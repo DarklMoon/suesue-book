@@ -16,7 +16,13 @@
 
 .image-container-3{
   width: 300px; /* Set a fixed width */
-  height: 3 00px; /* Set a fixed height */
+  height: 300px; /* Set a fixed height */
+  overflow: hidden;
+}
+
+.image-container-4{
+  width: 100px; /* Set a fixed width */
+  height: 150px; /* Set a fixed height */
   overflow: hidden;
 }
 

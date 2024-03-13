@@ -7,10 +7,11 @@ export type Cart = {
   book_title?: string;
   book_author?: string;
   book_image?: string;
-  book_price?: number; // Adjusted to number based on previous discussions
+  book_price?: float; // Adjusted to number based on previous discussions
   category_name?: string;
-  book_quantity?: string;
+  book_quantity?: number;
   cart_quantity?: string;
+  total_price?: float;
 };
 
 export type Book = {
@@ -44,4 +45,16 @@ export type Project =  {
   date: string;
   totalItems: number;
   totalPrice: string;
+}
+
+export type Shipping = {
+  shipment_id: string;
+  receiver_name: string;
+  receiver_phone: string;
+  street_address: string;
+  province: string;
+  district: string;
+  sub_district: string;
+  postal_code: string;
+  customer_id: string;  
 }

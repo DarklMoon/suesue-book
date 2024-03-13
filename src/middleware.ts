@@ -31,6 +31,11 @@ export const config = {
     "/updatebooks",
     "/addbook",
     "/profile",
-    "/bookDetail"
+    "/bookDetail",
+    "/shipping/chooseadd",
+    "/shipping/newadd",
+    "/cashpay",
+    "/order",
+    "/thxpay"
   ],
 };

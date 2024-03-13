@@ -64,7 +64,7 @@ const CashPay = (props: Props) => {
                 <TableCell className="font-medium">
                   <h1 className="text-[20px] font-bold">Dumb books</h1>
                   <p className="text-[12px] opacity-25">Categories</p>
-                  <p className="text-[12px] opacity-25">By Vendor's name</p>
+                  <p className="text-[12px] opacity-25">By name</p>
                 </TableCell>
                 <TableCell>50 ฿</TableCell>
                 <TableCell>1</TableCell>

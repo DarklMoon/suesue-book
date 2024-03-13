@@ -43,10 +43,8 @@ const mockData: Project[] = [
 interface ProfileProps {
   data: Project[];
 }
-const Profile = async ({ data }: ProfileProps) => {
+export default async function Profile({ data }: ProfileProps){
   const session = await getSession();
 
   return <ProfileComp user={session.user} data={data}></ProfileComp>;
 };
-
-export default Profile;

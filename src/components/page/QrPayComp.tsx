@@ -55,7 +55,7 @@ const QrPay = (props: Props) => {
                 <h1 className="text-[20px] font-bold">100.00 ฿</h1>
               </div>
               <p className="text-[15px] opacity-25">Categories</p>
-              <p className="text-[15px] opacity-25">By Vendor's name</p>
+              <p className="text-[15px] opacity-25">By name</p>
             </div>
             <div className="w-[400px] h-[80px]">
               <div className="w-full h-[30px] flex justify-between">
@@ -63,7 +63,7 @@ const QrPay = (props: Props) => {
                 <h1 className="text-[20px] font-bold">100.00 ฿</h1>
               </div>
               <p className="text-[15px] opacity-25">Categories</p>
-              <p className="text-[15px] opacity-25">By Vendor's name</p>
+              <p className="text-[15px] opacity-25">By name</p>
             </div>
             <div className="w-[400px] h-[80px]">
               <div className="w-full h-[30px] flex justify-between">
@@ -71,7 +71,7 @@ const QrPay = (props: Props) => {
                 <h1 className="text-[20px] font-bold">100.00 ฿</h1>
               </div>
               <p className="text-[15px] opacity-25">Categories</p>
-              <p className="text-[15px] opacity-25">By Vendor's name</p>
+              <p className="text-[15px] opacity-25">By name</p>
             </div>
             <div className="w-[400px] h-[80px]">
               <div className="w-full h-[30px] flex justify-between">
@@ -79,7 +79,7 @@ const QrPay = (props: Props) => {
                 <h1 className="text-[20px] font-bold">100.00 ฿</h1>
               </div>
               <p className="text-[15px] opacity-25">Categories</p>
-              <p className="text-[15px] opacity-25">By Vendor's name</p>
+              <p className="text-[15px] opacity-25">By name</p>
             </div>
           </div>
           <hr className="w-full h-[10px] border-[black] mt-[20px]"></hr>
